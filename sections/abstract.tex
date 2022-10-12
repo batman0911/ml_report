@@ -1,10 +1,16 @@
 \begin{abstract}
-    Tiểu luận này trình bày một số phương pháp lặp giải hệ phương trình tuyến tính
-    lớn bằng cách sử dụng kĩ thuật tối thiểu hóa phần dư tại mỗi bước lặp (minimal residual
-    (MR)). Ma trận của hệ tuyến tính được xem xét cả dạng tổng quát (sử dụng 
-    phương pháp GMRES (Generalized minimal residual method)) và dạng đối xứng 
-    xác định dương (sử dụng phương pháp MINRES (Minimal residual method)). Không gian con Krylov được xem xét để tìm
-    nghiệm gần đúng của hệ. Bài này cũng giới thiệu về phương pháp lặp Arnoldi và Lanczos.
-    Cuối cùng ta sử dụng ngôn ngữ lập trình Python để minh họa các thuật giải và so sánh hiệu năng 
-    của chúng. 
-\end{abstract}
+    Các nghiên cứu gần đấy đã chỉ ra tính dễ bị tổn thương của các mạng thần kinh sâu 
+    (Deep Neural Networks - DNNs) đến các mẫu đối thủ - một cách trực quan, hình ảnh
+    đối thủ không thể phân biệt có thể được tạo ra một cách dễ dàng khiến các mô hình 
+    được huấn luyện tốt cũng phân loại ảnh sai. Các phương pháp hiện có để tạo ra mẫu 
+    đối thủ thường dựa trên thông số biến dạng $L_2$ và $L_{\infty}$. Mặc dù trong 
+    thực tế độ biến dạng $L_1$ là quan trọng và quyết định đến tính thưa của nhiễu lại 
+    ít được xem xét. \\
+    Trong bài này, chúng tôi thiết kế một quy trình tấn công DNNs thông qua mẫu đối thủ
+    như một bài toán tối ưu hóa sử dụng hiệu chỉnh elastic-net. Tấn công DNNs bằng 
+    elastic-net (EAD) với tham số $L_1$ được thêm vào cùng với tấn công $L_2$. 
+    Kết quả thực nghiệm trên các tập dữ liệu MNIST, CIFAR10 và ImageNet chỉ ra rằng
+    EAD có thể mang lại một tập mẫu đối thủ với độ nhiều $L_1$ nhỏ và đạt được hiệu 
+    suất tấn công tương đương với các phương pháp hiện đại nhất qua các kịch bản tấn 
+    công khác nhau.
+\end{abstract} 

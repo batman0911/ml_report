@@ -37,7 +37,7 @@
 \RequirePackage[utf8]{inputenc}
 
 % Use T1 font encoding
-\RequirePackage[T1]{fontenc}
+\RequirePackage[OT1]{fontenc}
 
 % Key value processing
 \RequirePackage{pgfkeys}
@@ -60,10 +60,12 @@
 
 % Use Times New Roman as default font
 % \RequirePackage{helvet}
-\renewcommand{\familydefault}{\sfdefault}
+% \renewcommand{\familydefault}{\sfdefault}
 
 % Use Garamond as default font
 % \RequirePackage[urw-garamond]{mathdesign}
+
+% \usepackage{tgbonum}
 
 % Floats
 \RequirePackage{float}
