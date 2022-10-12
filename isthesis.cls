@@ -212,7 +212,7 @@
 	\newcommand{\consentformname}{Consent Form}%
 	\AtBeginDocument{%
 		\renewcommand{\contentsname}{Contents}%
-		\renewcommand{\listfigurename}{Figures}%
+		% \renewcommand{\listfigurename}{Figures}%
 		\renewcommand{\lstlistlistingname}{Listings}%
 		\renewcommand{\listtablename}{Tables}%
 		\renewcommand{\abstractname}{Abstract} %
@@ -255,13 +255,13 @@
 	\newcommand{\consentformname}{Einverst\"andniserkl\"arung}%
 	\AtBeginDocument{%
 		\renewcommand{\contentsname}{Inhaltsverzeichnis}%
-		\renewcommand{\listfigurename}{Abbildungsverzeichnis}%
+		% \renewcommand{\listfigurename}{Abbildungsverzeichnis}%
 		\renewcommand{\lstlistlistingname}{Codeverzeichnis}%
 		\renewcommand{\listtablename}{Tabellenverzeichnis}%
 		\renewcommand{\abstractname}{Abstract} %
 		\renewcommand{\appendixname}{Anhang} %
 		\renewcommand{\bibname}{Literaturverzeichnis}%
-		\renewcommand{\figurename}{Abbildung}
+		% \renewcommand{\figurename}{Abbildung}
 		\renewcommand{\cftfigpresnum}{Abbildung\ }
 		\setlength{\cftfignumwidth}{2.3cm}
 		\renewcommand{\tablename}{Tabelle}
@@ -381,15 +381,15 @@
 \isthesis@section@barrier{subsection}
 
 % Caption formatting
-\captionsetup{figurewithin=none,tablewithin=none} % Continuous numbering
-\captionsetup{labelsep=quad} % No separator between label and caption
-\AtBeginDocument{
-	    \counterwithout{lstlisting}{chapter} % Continous numbering for listings
-}
+% \captionsetup{figurewithin=none,tablewithin=none} % Continuous numbering
+% \captionsetup{labelsep=quad} % No separator between label and caption
+% \AtBeginDocument{
+% 	    \counterwithout{lstlisting}{chapter} % Continous numbering for listings
+% }
 
 % Figure formatting
-\let\figure@default\figure
-\let\endfigure@default\endfigure
+% \let\figure@default\figure
+% \let\endfigure@default\endfigure
 
 \pgfkeys{
     /isthesis/figure/.cd,
@@ -397,65 +397,65 @@
     toc/.initial={},
 }
 
-\define@key{figure}{caption}{\newcommand{\figure@caption}{#1}}
-\define@key{figure}{toc}{\newcommand{\figure@toc}{#1}}
-\define@key{figure}{label}{\newcommand{\figure@label}{#1}}
-\define@key{figure}{placement}{\newcommand{\figure@placement}{#1}}
-\define@key{figure}{width}{\newcommand{\figure@width}{#1}}
-\define@key{figure}{fit}[]{\newcommand{\figure@fit}{}}
-\define@key{figure}{cache}{\newcommand{\figure@cache}{#1}}
-\define@key{figure}{cachename}{\newcommand{\figure@cachename}{#1}}
+% \define@key{figure}{caption}{\newcommand{\figure@caption}{#1}}
+% \define@key{figure}{toc}{\newcommand{\figure@toc}{#1}}
+% \define@key{figure}{label}{\newcommand{\figure@label}{#1}}
+% \define@key{figure}{placement}{\newcommand{\figure@placement}{#1}}
+% \define@key{figure}{width}{\newcommand{\figure@width}{#1}}
+% \define@key{figure}{fit}[]{\newcommand{\figure@fit}{}}
+% \define@key{figure}{cache}{\newcommand{\figure@cache}{#1}}
+% \define@key{figure}{cachename}{\newcommand{\figure@cachename}{#1}}
 
-\newcommand{\figure@private@resize@width}{}
-\newcommand{\figure@private@resize@proxy}[1]{\resizebox{\figure@private@resize@width}{!}{#1}}
+% \newcommand{\figure@private@resize@width}{}
+% \newcommand{\figure@private@resize@proxy}[1]{\resizebox{\figure@private@resize@width}{!}{#1}}
 
-\renewenvironment{figure}[1][]{%
-    \setkeys{figure}{#1}%
-    \ifthenelse{\isundefined{\figure@placement}}{%
-        \newcommand{\figure@internal@placement}{ht}%
-    }{%
-        \ifthenelse{\equal{\figure@placement}{exact}}{% 
-            \newcommand{\figure@internal@placement}{!ht}%{H}%
-        }{%
-            \ifthenelse{\equal{\figure@placement}{top}}{% 
-                \newcommand{\figure@internal@placement}{t}%
-            }{%
-                \ifthenelse{\equal{\figure@placement}{bottom}}{% 
-                    \newcommand{\figure@internal@placement}{b}%
-                }{}%
-            }%
-        }%
-    }%
-    \expandafter\figure@default\expandafter[\figure@internal@placement]%
-    \ifthenelse{\isundefined{\figure@cache}}{}{%
-        % Control caching
-        \tikzset{external/export next=\figure@cache}%
-        % Raise a warning if a figure is not cached
-        % \ifthenelse{\equal{\figure@cache}{false}}{%
-        %     \ClassWarning{isthesis}{Figure \figure@cachename is not cached.}%
-        % }%
-    }%
-    \ifthenelse{\isundefined{\figure@cachename}}{}{%
-        % Set cache name
-        \tikzsetnextfilename{\figure@cachename}%
-    }%
-    \center%
-    \ifthenelse{\isundefined{\figure@width}}{}{%
-        \renewcommand{\figure@private@resize@width}{\figure@width}%
-        \collect@body\figure@private@resize@proxy%
-    }%
-}{%
-    \ifthenelse{\isundefined{\figure@toc}}{%
-        % Without dedicated TOC caption
-        \caption{\figure@caption\label{\figure@label}}%
-    }{%
-        % With dedicated TOC caption
-        \caption[\figure@toc]{\figure@caption\label{\figure@label}}%
-    }%
-    \endcenter%
-    \endfigure@default%
-}
-\renewcommand{\captionlabelfont}{\bfseries}
+% \renewenvironment{figure}[1][]{%
+%     \setkeys{figure}{#1}%
+%     \ifthenelse{\isundefined{\figure@placement}}{%
+%         \newcommand{\figure@internal@placement}{ht}%
+%     }{%
+%         \ifthenelse{\equal{\figure@placement}{exact}}{% 
+%             \newcommand{\figure@internal@placement}{!ht}%{H}%
+%         }{%
+%             \ifthenelse{\equal{\figure@placement}{top}}{% 
+%                 \newcommand{\figure@internal@placement}{t}%
+%             }{%
+%                 \ifthenelse{\equal{\figure@placement}{bottom}}{% 
+%                     \newcommand{\figure@internal@placement}{b}%
+%                 }{}%
+%             }%
+%         }%
+%     }%
+%     \expandafter\figure@default\expandafter[\figure@internal@placement]%
+%     \ifthenelse{\isundefined{\figure@cache}}{}{%
+%         % Control caching
+%         \tikzset{external/export next=\figure@cache}%
+%         % Raise a warning if a figure is not cached
+%         % \ifthenelse{\equal{\figure@cache}{false}}{%
+%         %     \ClassWarning{isthesis}{Figure \figure@cachename is not cached.}%
+%         % }%
+%     }%
+%     \ifthenelse{\isundefined{\figure@cachename}}{}{%
+%         % Set cache name
+%         \tikzsetnextfilename{\figure@cachename}%
+%     }%
+%     \center%
+%     \ifthenelse{\isundefined{\figure@width}}{}{%
+%         \renewcommand{\figure@private@resize@width}{\figure@width}%
+%         \collect@body\figure@private@resize@proxy%
+%     }%
+% }{%
+%     \ifthenelse{\isundefined{\figure@toc}}{%
+%         % Without dedicated TOC caption
+%         \caption{\figure@caption\label{\figure@label}}%
+%     }{%
+%         % With dedicated TOC caption
+%         \caption[\figure@toc]{\figure@caption\label{\figure@label}}%
+%     }%
+%     \endcenter%
+%     \endfigure@default%
+% }
+% \renewcommand{\captionlabelfont}{\bfseries}
 
 % Table formatting
 \let\table@default\table
