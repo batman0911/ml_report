@@ -35,5 +35,40 @@ với những xáo trộn của đối thủ, được gọi là huấn luyện 
 (Madry et al. 2017). Chúng cũng có được sử dụng để giải thích DNNs (Koh và Liang 2017;
 Dong et al. 2017). \\
 
+Trong bài báo này, chúng tôi sử dụng các mẫu đối thủ để tấn công phân loại ảnh dựa trên 
+mạng nơ ron tích chập. Mẫu đối thủ được tạo ra để làm sai lệch kết quả dự đoán và phải đảm bảo
+hình mới tạo ra giống với hình gốc. Trong quá khứ, sự giống nhau giữa mẫu đối thủ được tạo
+ra và hình gốc được đo bằng các tham số độ méo (\textit{distortion metrics}) khác nhau.
+Một metric thường được sử dụng là chuẩn $L_q$ 
+với $\lVert x \rVert_q = \left( \sum_{i=1}^p |x_i|^q \right)^{\frac{1}{q}}$ kí hiệu chuẩn $L_q$
+của vector $p$ chiều $x = [x_1, ..., x_p]$ với $q \geq 1$. Đặc biệt, khi tạo ra các mẫu đối thủ
+, độ méo $L_{\infty}$ được sử dụng để đánh giá sự thay đổi tối đa giá trị pixel (Goodfellow, 
+Shlens, and Szegedy 2015), trong khi độ méo $L_2$ được sử đụng để cải thiện chất lượng hình 
+ảnh (Carlini and Wagner 2017b). Tuy nhiên, trong thực tế, chuẩn $L_1$ được sử dụng rộng rãi 
+trong các bài toán phục hồi ảnh (Fu et al. 2006) cũng như phục hồi tính thưa (Candès and Wakin 2008),
+Các mẫu đối thủ dựa trên $L_1$ chưa được xem xét một cách kĩ càng. Trong bài toán mẫu đối thủ,
+độ biến dạng $L_1$ đánh giá tổng các thay đổi trong nhiễu loạn và đống vai trò là một thành phần
+(hàm) lồi đo lường số lượng pixel thay đổi (độ thưa) gây ra bởi nhiễu. Để lấp đầy khoảng trống
+này, chúng tôi xem xét một thuật toán tân công dựa trên hiệu chỉnh \textit{elastic-net}, được 
+gọi là tấn công elastic-net vào DNNs (elastic-net attacks to DNNs - EAD). Hiệu chỉnh 
+elastic-net là tổ hợp tuyến tính của các hàm penalty $L_1$ và $L_2$ và nó cũng là công cụ 
+tiêu chuẩn cho bài toán lựa chọn tính chất đặc trưng cho dữ liệu nhiều chiều (Zou and Hastie 2005). 
+Trong bài toán tấn công DNNs, EAD mở ra hướng nghiên cứu mới từ cách tân công hiện đại dựa trên 
+$L_2$ (Carlini and Wagner 2017b) và cũng đề xuất tấn công hiệu quả hơn theo định hướng $L_1$
+so với các phương pháp tấn công hiện có. \\
 
-
+Để khám phá hiệu quả của tấn công dựa trên $L_1$, chúng tôi tiến hành các thử nghiệm trên tập 
+dữ liệu MNIST, CIFAR10, và ImageNet trong các tình huống tấn công khác nhau. So sánh với các 
+phương pháp tấn công hiện có dựa trên $L_2$ và $L_{\infty}$ (Kurakin, Goodfellow, and 
+Bengio 2016b; Carlini and Wagner 2017b), EAD có thể đạt được tỉ lệ tấn công thành công tương 
+tự khi phá vỡ DNNs được phòng thủ hoặc không phòng thủ (Papernot et al. 2016b). Quan trọng 
+hơn, chúng tôi chỉ ra rằng, tấn công $L_1$ đạt được hiệu suất vượt trội so với các cuộc tấn
+công $L_2$ và $L_{\infty}$ trong các cuộc tấn công chuyển giao với các mẫu đổi thủ được huấn
+luyện bổ sung. Với tập dữ liệu khó nhất (MNIST), các kết quả từ EAD cải thiện tấn công chuyển 
+giao vào DNN không được phòng thủ hay được phòng thủ đạt tỉ lệ thành công gần $99\%$. Thêm vào 
+đó việc huận luyện kèm theo với mẫu đối thủ dựa trên $L_1$ và $L_2$ có thể tăng cường khả 
+năng phục hổi của DNNs đối với các nhiễu loạn. Những kết quả này gợi ý rằng EAD mang lại tập 
+mẫu đối thủ khác biệt nhưng hiệu quả hơn. Hơn thế nữa, đánh giá các cuộc tấn công dựa trên 
+độ méo $L_1$ cung cấp thêm hiểu biết mới về học máy đối kháng và sự bảo mật của DNNs, gợi 
+ý rằng $L_1$ có thể bổ sung cho $L_2$ và $L_{\infty}$ thúc đẩy các framework về học máy đối 
+kháng hoàn thiện hơn.

@@ -1,0 +1,32 @@
+\chapter{Các nghiên cứu liên quan}
+Trong phần này, chúng tôi tổng hợp các nghiên cứu liên quan về tấn công và phòng thủ DNNs.
+
+\section{Tấn công DNNs}
+\underline{FGM và I-FGM:} Kí hiệu $\mathbf{x_0}$ và $\mathbf{x}$ lần lượt là mẫu gốc và mẫu đối thủ,
+$t$ là lớp mục tiêu cần tấn công. Các phương pháp đạo hàm nhanh (\textit{fast gradient 
+methods - FGM}) sử dụng gradient $\nabla J$ của hàm mất mát trong tập huấn luyện $J$ với $\mathbf{x_0}$
+để tạo ra các mẫu đối thủ (Goodfellow, Shlens, and Szegedy 2015). Với tấn công $L_{\infty}$, 
+$\mathbf{x}$ được tính bằng công thức:
+\begin{equation}
+    \mathbf{x} = \mathbf{x_0} - \epsilon \times \text{sign}(\nabla J(\mathbf{x_0}, t))
+\end{equation}
+Trong đó $\epsilon$ là độ biến dạng $L_{\infty}$ giữa $\mathbf{x}$ và $\mathbf{x_0}$ và 
+$\text{sign}(\nabla J)$ là dấu của gradient. Với tấn công $L_1$ và $L_2$, $\mathbf{x}$ 
+được tính bằng công thức:
+\begin{equation}
+    \mathbf{x} = \mathbf{x_0} - \epsilon \frac{\nabla J(\mathbf{x_0}, t)}
+    {\lVert \nabla J(\mathbf{x_0}, t) \rVert _q}
+\end{equation}
+với $q = 1,2$ và $\epsilon$ là độ méo tương quan. Các phương pháp lặp đạo hàm nhanh 
+(\textit{Iterative fast gradient methods (I-FGM)}) được trình bày trong (Kurakin, Goodfellow, 
+and Bengio 2016b) là phương pháp lặp sửa dụng FGM với một độ méo mịn hơn. Các cuộc tấn công 
+không mục tiêu sử dụng FGM và I-FGM có thể được thực hiện theo cách tương tự nhau. \\
+
+\underline{C\&W attack:} Thay vì sử dụng hàm mất mát trên tập huấn luyện Carlini và Wagner
+đã thiết kế  một hiệu chỉnh $L_2$ trong hàm mất mát dựa trên lớp logit trong DNNs để sinh 
+ra các mẫu đối thủ (Carlini and Wagner 2017b). Công thức này hóa ra là một trường hợp riêng của 
+thuật toát EAD của chúng tôi (sẽ được trình bày trong phần sau). Tấn công C\&W được coi 
+là một trong những tấn công mạnh nhất đối với DNNs vì nó có thể phá vỡ cả những DNNs được 
+phòng thủ và chắt lọc, nó cũng có thể đạt được hiệu suất đáng kể với tấn công chuyển giao.
+
+
