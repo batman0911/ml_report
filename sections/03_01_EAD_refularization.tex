@@ -1,0 +1,19 @@
+\section{Sơ bộ về hiệu chỉnh Elastic-Net}
+Hiệu chỉnh elastic-net là công nghệ được sử dụng rộng rãi trong việc giải quyết 
+các bài toán lựa chọn thuộc tính nhiều chiều (Zou and Hastie 2005). Nó được xem 
+là công cụ hiệu chỉnh trong đó tổ hợp tuyến tính hàm phạt (\textit{penalty})
+$L_1$ và $L_2$. Nhìn chung, hiệu chỉnh elastic-net được sử dụng trong bài toán cực 
+tiểu hóa sau đây:
+\begin{equation}
+    \text{minimize}_{\mathbf{z} \in \mathcal{Z}} \text{ }
+    f(\mathbf{z}) + \lambda_1 \lVert \mathbf{z} \rVert_1
+    + \lambda_2 \lVert \mathbf{z} \rVert_2^2
+\end{equation}
+Trong đó $\mathbf{z}$ là véc tơ của $p$ biến tối ưu, $\mathcal{Z}$ là tập nghiệm 
+chấp nhận được, $f(\mathbf{z})$ là hàm mất mát, $\lVert \mathbf{z} \rVert_q$ là 
+chuẩn $q$ của $\mathbf{z}$ và $\lambda_1, \lambda_2 \geq 0$ tương ứng là các tham số hiệu 
+chỉnh $L_1$ và $L_2$. Biểu thức $\lambda_1 \lVert \mathbf{z} \rVert_1 + \lambda_2 
+\lVert \mathbf{z} \rVert_2^2$ là được gọi là hiệu chỉnh elactic-net của $\mathbf{z}$.
+Với bài toán hồi quy chuẩn, hàm mất mát $f(\mathbf{z})$ là hàm lỗi trung trung bình
+bình phương (\textit{mean squared error - MSE}), véc tơ $\mathbf{z}$ biểu diễn trọng 
+số của các thuộc tính và $\mathcal{Z} = \mathbb{R}^p$
