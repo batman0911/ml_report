@@ -1,0 +1,43 @@
+\section{Xây dựng thuật toán EAD}
+
+Từ tấn công C\&W (Carlini and Wagner 2017b), ta thêm vào cùng hàm mất mát $f$ để sinh 
+ra các mẫu đối nghịch. Đặc biệt, cho trước 1 ảnh $x_0$ và nhãn đúng của nó là $t_0$, 
+gọi $x$ là mẫu đối nghịch của $x_0$ với lớp đích nhắm đến là $t \neq t_0$ . Hàm mất mát 
+$f(x)$ cho tấn công nhắm đích là:
+\begin{equation}
+    \label{eq:3.2}
+    f(x, t) = \max { \left( \max_{j \neq t} [\textbf{Logit}(x)]_j - 
+    [\textbf{Logit}(x)]_t, -\kappa \right) }
+\end{equation}
+Trong đó $\textbf{Logit}(x) = [\textbf{Logit}(x)_1, ..., \textbf{Logit}(x)_K] 
+\in \mathbb{R}^K$ là lớp logit (lớp trước softmax) biểu diễn cho $x$ trong mạng DNN, $K$
+là số lượng lớp cần phân loại, $\kappa > 0$ là tham số tin cậy, nó đảm bảo một khoảng 
+cách cố định giữa $\max_{j \neq t} [\textbf{Logit}(x)]_j$ và $[\textbf{Logit}(x)]_t$. \\
+
+Cần lưu ý rằng, thành phần $[\textbf{Logit}(x)]_t$ là xác xuất dự đoán $x$ có nhãn $t$ theo 
+luật phân loại của hàm softmax:
+\begin{equation}
+    \label{eq:3.3}
+    \text{Prob}(\text{Label}(x) = t) = \frac{\exp([\textbf{Logit}(x)]_t)}{
+        \sum_{j=1}^{K} \exp([\textbf{Logit}(x)]_j)
+    }
+\end{equation}
+Do đó, hàm mất mát trong phương trình \ref{eq:3.2} có mục đích là để cho ra nhãn $t$ là 
+lớp có xác xuất cao nhất của $x$ và tham số $\kappa$ đảm bảo sự phân biệt giữa lớp $t$
+và lớp dự đoán gần nhất khác với $t$. Với tấn công không nhắm mục tiêu, hàm mất mát trong 
+phương trình \ref{eq:3.2} trở thành:
+\begin{equation}
+    \label{eq:3.4}\
+    f(x) = \max { \left([\textbf{Logit}(x)]_{t_0} - 
+    \max_{j \neq t} [\textbf{Logit}(x)]_j, -\kappa \right) }
+\end{equation}
+Trong bài viết này, chúng tôi tập trung vào tấn công nhắm mục tiêu vì nó khó hơn là không 
+nhắm mục tiêu. Thuật toán EAD có thể được áp dụng trực tiếp vào tấn công không nhắm mục 
+tiêu bằng cách thay $f(x,t)$ trong phương trình \ref{eq:3.2} thành $f(x)$ trong phương 
+trình \ref{eq:3.4}. \\
+
+Ngoài ra, để thao túng kết quả dự đoán thông qua hàm mất mát trong \ref{eq:3.2}, hiệu chỉnh 
+elastic-net còn tạo ra mẫu đối nghịch tương tự với ảnh gốc. Công thức tấn công elastic-net
+vào mạng DNNs (EAD) để tạo ra mẫu đối nghịch $(x,t)$ cho ảnh gốc $(x_0, t_0)$ như sau:
+
+
