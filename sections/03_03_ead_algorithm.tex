@@ -26,11 +26,11 @@ Trong đó, $\alpha_k$ là độ dài bước tại bước lặp thứ $k+1$, $
     \label{eq:3.7}
     [S_{\beta}(\mathbf{z})]_i = 
     \begin{cases}
-        \min \{ \mathbf{z}_i - \beta, 1 \} &\text{ nếu } \mathbf{z}_i - \mathbf{x_{0i}} > \beta; \\
-        \mathbf{x_{0i}} &\text{ nếu } |\mathbf{z}_i - \mathbf{x_{0i}}| \leq \beta; \\
-        \max \{ \mathbf{z}_i + \beta, 0 \} &\text{ nếu } \mathbf{z}_i - \mathbf{x_{0i}} < -\beta
+        \min \{ \mathbf{z}_i - \beta, 1 \} &\text{ nếu } \mathbf{z}_i - \mathbf{x_0}_i  > \beta; \\
+        \mathbf{x_0}_i &\text{ nếu } |\mathbf{z}_i - \mathbf{x_0}_i| \leq \beta; \\
+        \max \{ \mathbf{z}_i + \beta, 0 \} &\text{ nếu } \mathbf{z}_i - \mathbf{x_0}_i < -\beta
     \end{cases}
 \end{equation}
-Với $i \in \{ 1, ..., p \}$. Nếu $|\mathbf{z}_i - \mathbf{x_{0i}}| > \beta$, thành phần 
+Với $i \in \{ 1, ..., p \}$. Nếu $|\mathbf{z}_i - \mathbf{x_0}_i| > \beta$, thành phần 
 $\mathbf{z}_i$ được co lại với hệ số $\beta$ và chiếu thành phần kết quả lên miền ràng buộc 
 chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu 
