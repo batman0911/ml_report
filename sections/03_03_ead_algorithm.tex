@@ -10,10 +10,10 @@ trong việc giải bài toán tối ưu (Duchi and Singer 2009). \\
 
 Để giải bài toán EAD trong \ref{eq:3.5} để sinh ra các mẫu đối nghịch, bài viết này đề
 xuất sử dụng thuật toán ISTA (\textit{iterative shrinkage-thresholding algorithm – thuật toán lặp 
-với ngưỡng biến đổi}) (Beck and Teboulle 2009). STA được coi như thuật toán tối ưu bậc nhất
-phổ biến với thêm một bước điều chỉnh ngưỡng trong mỗi bước lặp. Cụ thể, 
+với ngưỡng biến đổi}) (Beck and Teboulle 2009). ISTA là một thuật toán tối ưu bậc nhất
+phổ biến, ISTA thêm một bước điều chỉnh ngưỡng trong mỗi bước lặp. Cụ thể, 
 đặt $g(\mathbf{x}) = c \times f(\mathbf{x}) + \lVert \mathbf{x} - \mathbf{x_0} \rVert_2^2$
-và đặt $\nabla g(\mathbf{x})$ là gradient của $g(\mathbf{x})$ được tính bơi mạng DNN. 
+và đặt $\nabla g(\mathbf{x})$ là gradient của $g(\mathbf{x})$ được tính bởi mạng DNN. 
 Tại bước lặp thứ $k+1$, mẫu đối nghịch $\mathbf{x}^{(k+1)}$ của $\mathbf{x_0}$ được tính 
 như sau:
 \begin{equation}
@@ -33,4 +33,17 @@ Trong đó, $\alpha_k$ là độ dài bước tại bước lặp thứ $k+1$, $
 \end{equation}
 Với $i \in \{ 1, ..., p \}$. Nếu $|\mathbf{z}_i - \mathbf{x_0}_i| > \beta$, thành phần 
 $\mathbf{z}_i$ được co lại với hệ số $\beta$ và chiếu thành phần kết quả lên miền ràng buộc 
-chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu 
+chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu $|\mathbf{z}_i - \mathbf{x_0}_i| \leq \beta$
+, nó đặt ngưỡng $\mathbf{z}_i$ bằng cách thiết lập $[S_{\beta}(\mathbf{z})]_i = \mathbf{x_0}_i$.
+Chứng minh thuật toán tối ưu sử dụng \ref{eq:3.6} để giải bài toán EAD trong \ref{eq:3.5}
+được trình bày trong tài liệu (https://arxiv.org/abs/1709.04114) \\
+
+Thuật toán EAD để tạo mẫu đối nghịch được tổng kết trong thuật toán 1. Để tính toán hiệu quả,
+ ta triển khai FISTA (fast ISTA) cho EAD, nó sẽ cho tốc độ hội tụ tối ưu với phương pháp 
+ tối ưu hóa bậc 1 (Beck and Teboulle 2009). Vector $\mathbf{y}^{(k)}$ trong thuật toán 1 
+ kết hợp với momen trong $\mathbf{x}^{(k)}$. Trong phép lặp EAD, bước lặp $\mathbf{y}^{(k)}$ 
+ được coi là mẫu đối nghịch thành công của $\mathbf{x_0}$ nếu mô hình dự báo thành lớp 
+ đích $t$. Mẫu đối nghịch $\mathbf{x}$ cuối cùng được lựa chọn từ tất cả các mẫu đối nghịch 
+ thành công. Trong bài viết này, chúng ta xem xét 2 luật để chọn $\mathbf{x}$ từ tập các 
+ mẫu đối nghịch thành công: elastic-net tối thiểu (EN) và nhiễu $L_1$ tương ứng với $\mathbf{x_0}$.
+Sự ảnh hưởng của $\beta$, $\kappa$  và luật quyết định lên EAD sẽ được nghiên cứu trong phần tiếp theo.
