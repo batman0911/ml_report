@@ -6,7 +6,7 @@ $\beta > 0$, ta thấy COV sẽ không hiệu quả để giải bài toán \ref
 nghịch tương ứng sẽ không nhạy cảm với thay đổi trên $\beta$ (xem phần đánh giá hiệu 
 năng để biết chi tiết). Vì $L_1$ không khả vi trên toàn không gian, COV không giải 
 được bài toán \ref{eq:3.5} do không dùng được phương pháp dưới đạo hàm (\textit{subgradient})
-trong việc giải bài toán tối ưu (Duchi and Singer 2009). \\
+trong việc giải bài toán tối ưu (Duchi and Singer 2009). 
 
 Để giải bài toán EAD trong \ref{eq:3.5} để sinh ra các mẫu đối nghịch, bài viết này đề
 xuất sử dụng thuật toán ISTA (\textit{iterative shrinkage-thresholding algorithm – thuật toán lặp 
@@ -36,7 +36,7 @@ $\mathbf{z}_i$ được co lại với hệ số $\beta$ và chiếu thành ph�
 chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu $|\mathbf{z}_i - \mathbf{x_0}_i| \leq \beta$
 , nó đặt ngưỡng $\mathbf{z}_i$ bằng cách thiết lập $[S_{\beta}(\mathbf{z})]_i = \mathbf{x_0}_i$.
 Chứng minh thuật toán tối ưu sử dụng \ref{eq:3.6} để giải bài toán EAD trong \ref{eq:3.5}
-được trình bày trong tài liệu (https://arxiv.org/abs/1709.04114) \\
+được trình bày trong tài liệu (https://arxiv.org/abs/1709.04114) 
 
 Thuật toán EAD để tạo mẫu đối nghịch được tổng kết trong thuật toán 1. Để tính toán hiệu quả,
  ta triển khai FISTA (fast ISTA) cho EAD, nó sẽ cho tốc độ hội tụ tối ưu với phương pháp 

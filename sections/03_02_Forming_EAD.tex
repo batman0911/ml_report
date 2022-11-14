@@ -13,7 +13,7 @@ Trong đó $\textbf{Logit}(\mathbf{x}) = [\textbf{Logit}(\mathbf{x})_1, ...,
 \textbf{Logit}(\mathbf{x})_K] 
 \in \mathbb{R}^K$ là lớp logit (lớp trước softmax) biểu diễn cho $\mathbf{x}$ trong mạng DNN, $K$
 là số lượng lớp cần phân loại, $\kappa > 0$ là tham số tin cậy, nó đảm bảo một khoảng 
-cách cố định giữa $\max_{j \neq t} [\textbf{Logit}(\mathbf{x})]_j$ và $[\textbf{Logit}(\mathbf{x})]_t$. \\
+cách cố định giữa $\max_{j \neq t} [\textbf{Logit}(\mathbf{x})]_j$ và $[\textbf{Logit}(\mathbf{x})]_t$. 
 
 Cần lưu ý rằng, thành phần $[\textbf{Logit}(x)]_t$ là xác xuất dự đoán $x$ có nhãn $t$ theo 
 luật phân loại của hàm softmax:
@@ -35,7 +35,7 @@ phương trình \ref{eq:3.2} trở thành:
 Trong bài viết này, chúng tôi tập trung vào tấn công nhắm mục tiêu vì nó khó hơn là không 
 nhắm mục tiêu. Thuật toán EAD có thể được áp dụng trực tiếp vào tấn công không nhắm mục 
 tiêu bằng cách thay $f(x,t)$ trong phương trình \ref{eq:3.2} thành $f(x)$ trong phương 
-trình \ref{eq:3.4}. \\
+trình \ref{eq:3.4}. 
 
 Ngoài ra, để thao túng kết quả dự đoán thông qua hàm mất mát trong \ref{eq:3.2}, hiệu chỉnh 
 elastic-net còn tạo ra mẫu đối nghịch tương tự với ảnh gốc. Công thức tấn công elastic-net
@@ -55,7 +55,7 @@ $\mathbf{x} \in [0,1]^p$ giữ cho $\mathbf{x}$ trong một không gian ảnh m�
 bằng cách chia mỗi giá trị của pixel cho giá trị lớn nhất (ví dụ $255$). Để xác định Khoảng 
 cách (nhiễu) giữa $\mathbf{x}$ và $\mathbf{x_0}$ bằng $\mathbf{\delta} = \mathbf{x} - \mathbf{x_0}$,
 công thức EAD trong \ref{eq:3.5} được tạo ra để tìm một mẫu đối nghịch $\mathbf{x}$ mà sẽ 
-được phân loại vào lớp mục tiêu $t$, đồng thời cực tiểu hóa $mathbf{\delta}$ trong hàm
+được phân loại vào lớp mục tiêu $t$, đồng thời cực tiểu hóa $\mathbf{\delta}$ trong hàm
 mất mát elastic-net $\beta \lVert \mathbf{\delta} \rVert_1 + \lVert \mathbf{\delta} \rVert_2^2$.
 Đáng chú ý, công thức tấn công C\&W (Carlini and Wagner 2017b) trở thành trường hợp đặc biệt 
 của EAD trong công thức \ref{eq:3.5} khi $\beta = 0$ , không phụ thuộc vào $L_1$ của $\mathbf{\delta}$.

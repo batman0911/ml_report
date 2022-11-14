@@ -10,13 +10,13 @@ tiểu hóa sau đây:
     f(\mathbf{z}) + \lambda_1 \lVert \mathbf{z} \rVert_1
     + \lambda_2 \lVert \mathbf{z} \rVert_2^2
 \end{equation}
-Trong đó $\mathbf{z}$ là véc tơ của $p$ biến tối ưu, $\mathcal{Z}$ là tập nghiệm 
+Trong đó $\mathbf{z}$ là vector của $p$ biến tối ưu, $\mathcal{Z}$ là tập nghiệm 
 chấp nhận được, $f(\mathbf{z})$ là hàm mất mát, $\lVert \mathbf{z} \rVert_q$ là 
 chuẩn $q$ của $\mathbf{z}$ và $\lambda_1, \lambda_2 \geq 0$ tương ứng là các tham số hiệu 
 chỉnh $L_1$ và $L_2$. Biểu thức $\lambda_1 \lVert \mathbf{z} \rVert_1 + \lambda_2 
 \lVert \mathbf{z} \rVert_2^2$ là được gọi là hiệu chỉnh elactic-net của $\mathbf{z}$.
 Với bài toán hồi quy chuẩn, hàm mất mát $f(\mathbf{z})$ là hàm lỗi trung trung bình
-bình phương (\textit{mean squared error - MSE}), véc tơ $\mathbf{z}$ biểu diễn trọng 
+bình phương (\textit{mean squared error - MSE}), vector $\mathbf{z}$ biểu diễn trọng 
 số của các thuộc tính và $\mathcal{Z} = \mathbb{R}^p$. Hiệu chỉnh elastic-net trong 
 phương trình \ref{eq:3.1} chính là công thức Lasso khi $\lambda_2 = 0$ và trở thành công 
 thức hồi quy Ridge khi $\lambda_1 = 0$. (Zou and Hastie 2005) đã chỉ ra rằng hiệu chỉnh 

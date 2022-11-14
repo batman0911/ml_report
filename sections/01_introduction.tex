@@ -16,7 +16,7 @@ làm cho một DNNs đã được huấn luyện phân loại sai. Tệ hơn n�
 \end{figure}
 Ví dụ trực quan trên thể hiện 3 mẫu đối nghịch của một hình con đà điểu ("ostrich") 
 được sinh ra bằng thuật toán của chúng tôi. Các mẫu này được mô hình Inception-v3 
-(Szegedy et al. 2016) phân loại thành "safe", "shoe shop" và "vacuum". \\
+(Szegedy et al. 2016) phân loại thành "safe", "shoe shop" và "vacuum". 
 
 Sự thiếu mạnh mẽ của DNNs thể hiện trước các mẫu đối nghịch đã làm dấy lên những lo ngại 
 nghiêm trọng về vấn đề bảo mật các ứng dụng, bao gồm nhận dạng tín hiệu giao thông 
@@ -33,7 +33,7 @@ từ mô hình DNN này sang mô hình DNN khác. Ngoài việc đánh giá mứ
 Các mẫu đối nghịch có thể được sử dụng để huẩn luyện một mô hình mạnh có khả năng chống chịu 
 với những xáo trộn của đối nghịch, được gọi là huấn luyện đối nghịch (\textit{adverarial training}) 
 (Madry et al. 2017). Chúng cũng có được sử dụng để giải thích DNNs (Koh và Liang 2017;
-Dong et al. 2017). \\
+Dong et al. 2017). 
 
 Trong bài báo này, chúng tôi sử dụng các mẫu đối nghịch để tấn công phân loại ảnh dựa trên 
 mạng nơ ron tích chập. Mẫu đối nghịch được tạo ra để làm sai lệch kết quả dự đoán và phải đảm bảo
@@ -55,7 +55,7 @@ elastic-net là tổ hợp tuyến tính của các hàm penalty $L_1$ và $L_2$
 tiêu chuẩn cho bài toán lựa chọn tính chất đặc trưng cho dữ liệu nhiều chiều (Zou and Hastie 2005). 
 Trong bài toán tấn công DNNs, EAD mở ra hướng nghiên cứu mới từ cách tân công hiện đại dựa trên 
 $L_2$ (Carlini and Wagner 2017b) và cũng đề xuất tấn công hiệu quả hơn theo định hướng $L_1$
-so với các phương pháp tấn công hiện có. \\
+so với các phương pháp tấn công hiện có. 
 
 Để khám phá hiệu quả của tấn công dựa trên $L_1$, chúng tôi tiến hành các thử nghiệm trên tập 
 dữ liệu MNIST, CIFAR10, và ImageNet trong các tình huống tấn công khác nhau. So sánh với các 

@@ -20,14 +20,14 @@ $\text{sign}(\nabla J)$ là dấu của gradient. Với tấn công $L_1$ và $L
 với $q = 1,2$ và $\epsilon$ là độ méo tương quan. Các phương pháp lặp đạo hàm nhanh 
 (\textit{Iterative fast gradient methods (I-FGM)}) được trình bày trong (Kurakin, Goodfellow, 
 and Bengio 2016b) là phương pháp lặp sửa dụng FGM với một độ méo mịn hơn. Các cuộc tấn công 
-không nhắm mục tiêu sử dụng FGM và I-FGM có thể được thực hiện theo cách tương tự nhau. \\
+không nhắm mục tiêu sử dụng FGM và I-FGM có thể được thực hiện theo cách tương tự nhau. 
 
 \underline{C\&W attack:} Thay vì sử dụng hàm mất mát trên tập huấn luyện Carlini và Wagner
 đã thiết kế  một hiệu chỉnh $L_2$ trong hàm mất mát dựa trên lớp logit trong DNNs để sinh 
 ra các mẫu đối nghịch (Carlini and Wagner 2017b). Công thức này hóa ra là một trường hợp riêng của 
 thuật toát EAD của chúng tôi (sẽ được trình bày trong phần sau). Tấn công C\&W được coi 
 là một trong những tấn công mạnh nhất đối với DNNs vì nó có thể phá vỡ cả những DNNs được 
-phòng thủ và chắt lọc, nó cũng có thể đạt được hiệu suất đáng kể với tấn công chuyển giao. \\
+phòng thủ và chắt lọc, nó cũng có thể đạt được hiệu suất đáng kể với tấn công chuyển giao. 
 
 \underline{DeepFool:} là một thuật toán tân công không nhắm mục tiêu $L_2$ (Moosavi-Dezfooli, 
 Fawzi, and Frossard 2016) dựa trên lý thuyết về phép chiếu tới siêu phẳng phân tách gần nhất
