@@ -1,10 +1,10 @@
 \chapter{Giới thiệu}
 Mạng nơ ron sâu (DNNs) đã đạt hiệu quả rất tốt với các bài toán trong học máy
 và trí tuệ nhân tạo như phân loại ảnh, nhận diện giọng nói, dịch máy và trò chơi.
-Mặc dù DNNs rất hiệu quả nhưng mốt số nghiên cứu gần đây đã chứng minh DNNs rất 
+Mặc dù DNNs rất hiệu quả nhưng một số nghiên cứu gần đây đã chứng minh DNNs rất 
 dễ  "tổn thương" với các mẫu đối nghịch (Szegedy et al. 2013; Goodfellow, Shlens, 
 and Szegedy 2015). Ví dụ, một hình ảnh với nhiễu được thiết kế cẩn thận có thể
-làm cho một DNNs đã được huấn luyện phân loại sai. Tệ hơn nữa, các mẫu đối nghịch
+làm cho một DNN đã được huấn luyện phân loại sai. Tệ hơn nữa, các mẫu đối nghịch
 được tạo ra hầu như không thể phân biệt được bằng mắt người. 
 \begin{figure}[H] % places figure environment here   
     \centering % Centers Graphic
@@ -30,7 +30,7 @@ cụ thể và các cuộc tấn công không nhắm mục tiêu (\textit{untarg
 để tạo ra các mẫu đối nghịch không được phân loại như lớp học ban đầu. Các cuộc tấn công 
 chuyển giao (\textit{transfer attacks}) nhằm mục đích tạo ra các mẫu đối nghịch có thể chuyển 
 từ mô hình DNN này sang mô hình DNN khác. Ngoài việc đánh giá mức độ mạnh mẽ của DNNs,
-Các mẫu đối nghịch có thể được sử dụng để huẩn luyện một mô hình mạnh có khả năng chống chịu 
+Các mẫu đối nghịch có thể được sử dụng để huấn luyện một mô hình mạnh có khả năng chống chịu 
 với những xáo trộn của đối nghịch, được gọi là huấn luyện đối nghịch (\textit{adverarial training}) 
 (Madry et al. 2017). Chúng cũng có được sử dụng để giải thích DNNs (Koh và Liang 2017;
 Dong et al. 2017). 
@@ -47,7 +47,7 @@ Shlens, and Szegedy 2015), trong khi độ méo $L_2$ được sử đụng đ�
 ảnh (Carlini and Wagner 2017b). Tuy nhiên, trong thực tế, chuẩn $L_1$ được sử dụng rộng rãi 
 trong các bài toán phục hồi ảnh (Fu et al. 2006) cũng như phục hồi tính thưa (Candès and Wakin 2008),
 Các mẫu đối nghịch dựa trên $L_1$ chưa được xem xét một cách kĩ càng. Trong bài toán mẫu đối nghịch,
-độ biến dạng $L_1$ đánh giá tổng các thay đổi trong nhiễu loạn và đống vai trò là một thành phần
+độ biến dạng $L_1$ đánh giá tổng các thay đổi trong nhiễu loạn và đóng vai trò là một thành phần
 (hàm) lồi đo lường số lượng pixel thay đổi (độ thưa) gây ra bởi nhiễu. Để lấp đầy khoảng trống
 này, chúng tôi xem xét một thuật toán tân công dựa trên hiệu chỉnh \textit{elastic-net}, được 
 gọi là tấn công elastic-net vào DNNs (elastic-net attacks to DNNs - EAD). Hiệu chỉnh 
