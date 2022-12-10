@@ -1,24 +1,25 @@
 \section{Thiết kế thực nghiệm}
 Thực nghiệm sử dụng framework của Carlini và Wagner. Với cả tấn công EAD và C\&W, tác giả đều sử dụng các tham số cấu hình mặc định, trong đó triển khai 9 bước tìm kiếm nhị phân trên tham số hiệu chỉnh  (bắt đầu từ 0.001) và chạy  vòng lặp cho mỗi bước với learning rate khởi tạo . Để tìm các mẫu đối nghịch thành công, tác giả sử dụng thuật toán tối ưu tham chiếu (ADAM) cho C\&W, và sử dụng thuật toán chiếu FISTA (thuật toán 1) với square-root decaying learning rate cho EAD. Tương tự tấn công C\&W, mẫu đối nghịch cuối cùng tìm được từ EAD được chọn là mẫu nhiễu ít nhất giữa các mẫu đối nghịch thành công. Độ nhạy cảm của L1 (tham số  ) và tác động của luật chọn trong EAD sẽ được bàn đến ở phần sau. Tác giả đặt tham số tấn công chuyển giao $\kappa = 0$ cho cả EAD và C\&W.
-\begin{center}
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{cc|c|c|c}
-        \hline
-        && Best case & Average case & Worst case \\
-        \hline
-        Optimization method & $\beta$  
-        & \begin{tabular}{cccc}
-            ASR & $L_1$ & $L_2$ & $L_{\infty}$
-        \end{tabular}
-        & \begin{tabular}{cccc}
-            ASR & $L_1$ & $L_2$ & $L_{\infty}$
-        \end{tabular}
-        & \begin{tabular}{cccc}
-            ASR & $L_1$ & $L_2$ & $L_{\infty}$
-        \end{tabular} \\  
-        \hline    
-    \end{tabular}}
-\end{center}
+
+\begin{longtable}[c]{l}
+	\resizebox{\textwidth}{!}{
+	\begin{tabular}{p{2.5cm}l|llll|llll|llll}
+		\hline
+		&&\multicolumn{4}{c|}{Best case} & \multicolumn{4}{c|}{Average case} & \multicolumn{4}{c}{Worst case} \\ \hline
+		Optimization method & $\beta$ & ASR & $L_1$ & $L_2$ & $L_\infty$ & ASR & $L_1$ & $L_2$ & $L_\infty$ & ASR & $L_1$ & $L_2$ & $L_\infty$ \\ \hline
+		\multirow{5}{*}{COV} & 0 & 100 & 13.93 & 1.377 & 0.379 & 100 & 22.46 & 1.972 & 0.514 & 99.8 & 32.3 & 2.639 & 0.663 \\
+		& $10^{-5}$ & 100 & 13.92 & 1.377 & 0.379 & 100 & 22.66 & 1.98 & 0.508 & 99.5 & 32.33 & 2.64 & 0.663 \\
+		& $10^{-4}$ & 100 & 13.91 & 1.377 & 0.379 & 100 & 23.11 & 2.013 & 0.517 & 100 & 32.32 & 2.639 & 0.664 \\
+		& $10^{-3}$ & 100 & 13.8 & 1.377 & 0.381 & 100 & 22.42 & 1.977 & 0.512 & 99.9 & 32.2 & 2.639 & 0.664 \\
+		& $10^{-2}$ & 100 & 12.98 & 1.38 & 0.389 & 100 & 22.27 & 2.026 & 0.53 & 99.5 & 31.41 & 2.643 & 0.673 \\ \hline
+		\multirow{5}{*}{EAD (EN rule)} & 0 & 100 & 14.04 & 1.369 & 0.376 & 100 & 22.63 & 1.953 & 0.512 & 99.8 & 31.43 & 2.51 & 0.644 \\
+		& $10^{-5}$ & 100 & 13.66 & 1.369 & 0.378 & 100 & 22.6 & 1.98 & 0.515 & 99.9 & 30.79 & 2.507 & 0.648 \\
+		& $10^{-4}$ & 100 & 12.79 & 1.372 & 0.388 & 100 & 20.98 & 1.951 & 0.521 & 100 & 29.21 & 2.514 & 0.667 \\
+		& $10^{-3}$ & 100 & 9.808 & 1.427 & 0.452 & 100 & 17.4 & 2.001 & 0.594 & 100 & 25.52 & 2.582 & 0.748 \\
+		& $10^{-2}$ & 100 & 7.271 & 1.718 & 0.674 & 100 & 13.56 & 2.395 & 0.852 & 100 & 20.77 & 3.021 & 0.976 \\ \hline
+	\end{tabular}} \\
+	\caption[So sánh COV và EAD trên tập MNIST]{So sánh COV và EAD trong việc tìm ra công thức elastic-net trên tập MNIST. ASR là tỷ lệ tấn công thành công. Mặc dù 2 phương pháp trên đều đạt được tỷ lệ tấn công thành công như nhau, COV không hiệu quá trong việc tạo ra các mẫu đối nghịch $L_1$. Khi $\beta$ tăng lên, EAD tạo ra ít mẫu đối nghịch $L_1$ hơn trong khi COV thì không bị ảnh hưởng nhiều khi thay đổi $\beta$.} \\
+\end{longtable}
 
 Tác giả triển khai FGM và I-FGM bằng gói thư viện CleverHans. Tham số nhiễu tốt nhất $\epsilon$ được xác định bằng phương pháp tìm kiếm lưới fine-grained trên mỗi ảnh, $\epsilon$ nhỏ nhất trong lưới thể hiện tấn công thành công sẽ được ghi lại. Với I-FGM, tác giả thực hiện $10$ vòng lặp FGM ($10$ là giá trị mặc định) với $\epsilon$-ball clipping. Tham số nhiễu $\epsilon'$ trong mỗi vòng lặp FGM được đặt là $\epsilon/10$ , đã được chứng minh hiệu quả trong (Tram`er et al. 2017). Dải giá trị của lưới và độ phân giải của 2 phương pháp trên được đề cập cụ thể trong tài liệu bổ sung 1.
 

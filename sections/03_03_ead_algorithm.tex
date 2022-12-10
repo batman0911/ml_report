@@ -38,6 +38,24 @@ chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu $|\mathbf{z}_
 Chứng minh thuật toán tối ưu sử dụng \ref{eq:3.6} để giải bài toán EAD trong \ref{eq:3.5}
 được trình bày trong tài liệu (https://arxiv.org/abs/1709.04114) 
 
+\begin{center}
+	\begin{tabular}{lll}
+		\hline 
+		\multicolumn{3}{l}{\textbf{Algorithm 1} Elastic-Net Attacks to DNNs (EAD)} \\
+		\hline 
+		& \multicolumn{2}{p{14cm}}{\textbf{Input}: original labeled image ($x_0$, $t_0$), target attack class $t$, attack transferability parameter $\kappa$, $L_1$ regularization parameter $\beta$, step size $\alpha_k$, \# of iterations $I$} \\
+		& \multicolumn{2}{l}{\textbf{Output}: adversarial example $x$} \\
+		& \multicolumn{2}{l}{Initialization: $x^{(0)}$ = $y^{(0)}$ = $x_0$} \\
+		& \multicolumn{2}{l}{\textbf{for} $k = 0$ to $I - 1$ do} \\
+		&& $x^{(k=1)} = S_{\beta}(y^{(k)} -\alpha_{k} \nabla g(y^{(k)}))$ \\
+		&& $y^{(k+1)} = x^{(k+1)} + \frac{k}{k+3} (x^{(k+1)} - x^{(k)}) $ \\
+		& \multicolumn{2}{l}{\textbf{end for}} \\
+		& \multicolumn{2}{p{14cm}}{Decision rule: determine $x$ from successful examples in $\{x^k\}_{k=1}^{I}$ (EN rule or $L_1$ rule).}\\
+		\hline
+	\end{tabular}
+	\label{arg:ag_1}
+\end{center}
+
 Thuật toán EAD để tạo mẫu đối nghịch được tổng kết trong thuật toán 1. Để tính toán hiệu quả,
  ta triển khai FISTA (fast ISTA) cho EAD, nó sẽ cho tốc độ hội tụ tối ưu với phương pháp 
  tối ưu hóa bậc 1 (Beck and Teboulle 2009). Vector $\mathbf{y}^{(k)}$ trong thuật toán 1 
