@@ -1,2 +1,23 @@
 \section{Huấn luyện đối nghịch bổ sung}
-Để xem xét sự khác biệt giữa các mẫu đối nghịch $L_1$ và $L_2$, tác giả kiểm tra hiệu quả huấn luyện đối nghịch trên tập MNIST. Họ chọn ngẫu nhiên $1000$ ảnh từ tập huấn luyện và sử dụng tấn công C\&W và EAD (luật chọn $L_1$) để tạo ra $9000$ mẫu đối nghịch cho tất cả các nhãn sai với mỗi phương pháp. Sau đó, họ thêm vào tập huấn luyện các mẫu đối nghịch này để huấn luyện lại mạng và kiểm tra sức mạnh của nó trên tập kiếm thử, kết quả tổng hợp trong bảng 3. Để huấn luyện đối nghịch với 1 phương pháp nào đó, mặc dù cả 2 tấn công đều đạt tỷ lệ thành công trung bình $100\%$, mạng vẫn có sức chịu đựng tốt hơn trước nhiễu đối nghịch vì các chỉ số nhiễu đều đã tăng lên đáng kể so với trường hợp chưa huấn luyện. Tác giả cũng quan sát thấy kết hợp huấn luyện bằng EAD và phương pháp C\&W có thể làm tăng hơn nữa nhiễu $L_1$ và $L_2$ so với tấn công C\&W, và tăng nhiễu $L_2$ so với EAD, với giả thiết rằng mẫu $L_1$ được tạo bởi EAD có thể được huấn luyện đối nghịch bổ sung.  
+Để xem xét sự khác biệt giữa các mẫu đối nghịch $L_1$ và $L_2$, tác giả kiểm tra hiệu quả huấn luyện đối nghịch trên tập MNIST. Họ chọn ngẫu nhiên $1000$ ảnh từ tập huấn luyện và sử dụng tấn công C\&W và EAD (luật chọn $L_1$) để tạo ra $9000$ mẫu đối nghịch cho tất cả các nhãn sai với mỗi phương pháp. Sau đó, họ thêm vào tập huấn luyện các mẫu đối nghịch này để huấn luyện lại mạng và kiểm tra sức mạnh của nó trên tập kiếm thử, kết quả tổng hợp trong bảng \ref{tab:tab_3}. Để huấn luyện đối nghịch với 1 phương pháp nào đó, mặc dù cả 2 tấn công đều đạt tỷ lệ thành công trung bình $100\%$, mạng vẫn có sức chịu đựng tốt hơn trước nhiễu đối nghịch vì các chỉ số nhiễu đều đã tăng lên đáng kể so với trường hợp chưa huấn luyện. Tác giả cũng quan sát thấy kết hợp huấn luyện bằng EAD và phương pháp C\&W có thể làm tăng hơn nữa nhiễu $L_1$ và $L_2$ so với tấn công C\&W, và tăng nhiễu $L_2$ so với EAD, với giả thiết rằng mẫu $L_1$ được tạo bởi EAD có thể được huấn luyện đối nghịch bổ sung.  
+
+\begin{longtable}{l}
+		\begin{tabular}{ll|llll}
+			\hline
+			\multirow{2}{*}{Attack method} & \multirow{2}{*}{Adversarial training} & \multicolumn{4}{c}{Average case} \\
+			& & ASR & $L_1$ & $L_2$ & $L_\infty$ \\
+			\hline
+			\multirow{4}{*}{C\&W ($L_2$)} & None & 100 & 22.46 & 1.972 & 0.514 \\
+			& EAD & 100 & 26.11 & 2.468 & 0.643 \\
+			& C\&W & 100 & 24.97 & 2.47 & 0.684 \\
+			& EAD + C\&W & 100 & 27.32 & 2.513 & 0.653 \\
+			\hline
+			\multirow{4}{*}{EAD ($L_1$ rule)} & None & 100 & 14.11 & 2.211 & 0.768 \\
+			& EAD & 100 & 17.04 & 2.653 & 0.86 \\
+			& C\&W & 100 & 15.49 & 2.628 & 0.892 \\
+			& EAD + C\&W & 100 & 16.83 & 2.66 & 0.87 \\
+			\hline
+		\end{tabular} \\
+		\caption[Huấn luyện đối nghịch sử dụng tấn công C\&W và EAD (luật $L_1$) trên tập dữ liệu MNIST]{Huấn luyện đối nghịch sử dụng tấn công C\&W và EAD (luật $L_1$) trên tập dữ liệu MNIST. ASR là tỷ lệ tấn công thành công. Các kết hợp $L_1$ example triển khai huấn luyện đối nghịch và tăng cường độ khó của tấn công về phương diện nhiễu. Kết quả đầy đủ có trong tài liệu mở rộng.}
+		\label{tab:tab_3}
+\end{longtable}	
