@@ -1,14 +1,14 @@
 \section{Thuật toán EAD}
-Khi giải bài toán EAD trong \ref{eq:3.5} mà không có thành phần $L_1$, Carlini and Wagner 
+Khi giải bài toán EAD trong \ref{eq:7} mà không có thành phần $L_1$, Carlini and Wagner 
 sử dụng kĩ thuật COV (change-of-variable) qua hàm \textit{tanh} trên $\mathbf{x}$ nhằm 
 mục đích loại bỏ ràng buộc $\mathbf{x} \in [0,1]^p$ (Carlini and Wagner 2017b). Khi 
-$\beta > 0$, ta thấy COV sẽ không hiệu quả để giải bài toán \ref{eq:3.5} vì mẫu đối 
+$\beta > 0$, ta thấy COV sẽ không hiệu quả để giải bài toán \ref{eq:7} vì mẫu đối 
 nghịch tương ứng sẽ không nhạy cảm với thay đổi trên $\beta$ (xem phần đánh giá hiệu 
 năng để biết chi tiết). Vì $L_1$ không khả vi trên toàn không gian, COV không giải 
-được bài toán \ref{eq:3.5} do không dùng được phương pháp dưới đạo hàm (\textit{subgradient})
+được bài toán \ref{eq:7} do không dùng được phương pháp dưới đạo hàm (\textit{subgradient})
 trong việc giải bài toán tối ưu (Duchi and Singer 2009). 
 
-Để giải bài toán EAD trong \ref{eq:3.5} để sinh ra các mẫu đối nghịch, bài viết này đề
+Để giải bài toán EAD trong \ref{eq:7} để sinh ra các mẫu đối nghịch, bài viết này đề
 xuất sử dụng thuật toán ISTA (\textit{iterative shrinkage-thresholding algorithm – thuật toán lặp 
 với ngưỡng biến đổi}) (Beck and Teboulle 2009). ISTA là một thuật toán tối ưu bậc nhất
 phổ biến, ISTA thêm một bước điều chỉnh ngưỡng trong mỗi bước lặp. Cụ thể, 
@@ -17,13 +17,13 @@ và đặt $\nabla g(\mathbf{x})$ là gradient của $g(\mathbf{x})$ được t�
 Tại bước lặp thứ $k+1$, mẫu đối nghịch $\mathbf{x}^{(k+1)}$ của $\mathbf{x_0}$ được tính 
 như sau:
 \begin{equation}
-    \label{eq:3.6}
+    \label{eq:8}
     \mathbf{x}^{(k+1)} = S_{\beta} (\mathbf{x}^{(k)} - \alpha_k \nabla g(\mathbf{x}^{(k)}))
 \end{equation}
 Trong đó, $\alpha_k$ là độ dài bước tại bước lặp thứ $k+1$, $S_{\beta} : \mathbb{R}^p \to 
 \mathbb{R}^p$ là hàm của phép chiếu biến đổi ngưỡng trên từng phần tử, được xác định bởi:
 \begin{equation}
-    \label{eq:3.7}
+    \label{eq:9}
     [S_{\beta}(\mathbf{z})]_i = 
     \begin{cases}
         \min \{ \mathbf{z}_i - \beta, 1 \} &\text{ nếu } \mathbf{z}_i - \mathbf{x_0}_i  > \beta; \\
@@ -35,7 +35,7 @@ Với $i \in \{ 1, ..., p \}$. Nếu $|\mathbf{z}_i - \mathbf{x_0}_i| > \beta$, 
 $\mathbf{z}_i$ được co lại với hệ số $\beta$ và chiếu thành phần kết quả lên miền ràng buộc 
 chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu $|\mathbf{z}_i - \mathbf{x_0}_i| \leq \beta$
 , nó đặt ngưỡng $\mathbf{z}_i$ bằng cách thiết lập $[S_{\beta}(\mathbf{z})]_i = \mathbf{x_0}_i$.
-Chứng minh thuật toán tối ưu sử dụng \ref{eq:3.6} để giải bài toán EAD trong \ref{eq:3.5}
+Chứng minh thuật toán tối ưu sử dụng \ref{eq:8} để giải bài toán EAD trong \ref{eq:7}
 được trình bày trong tài liệu \footnote{https://arxiv.org/abs/1709.04114}
 
 \begin{center}

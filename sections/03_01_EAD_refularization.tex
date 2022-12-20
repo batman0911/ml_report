@@ -5,7 +5,7 @@ là công cụ hiệu chỉnh trong đó tổ hợp tuyến tính hàm phạt (\
 $L_1$ và $L_2$. Nhìn chung, hiệu chỉnh elastic-net được sử dụng trong bài toán cực 
 tiểu hóa sau đây:
 \begin{equation}
-    \label{eq:3.1}
+    \label{eq:3}
     \text{minimize}_{\mathbf{z} \in \mathcal{Z}} \text{ }
     f(\mathbf{z}) + \lambda_1 \lVert \mathbf{z} \rVert_1
     + \lambda_2 \lVert \mathbf{z} \rVert_2^2
@@ -18,7 +18,7 @@ chỉnh $L_1$ và $L_2$. Biểu thức $\lambda_1 \lVert \mathbf{z} \rVert_1 + \
 Với bài toán hồi quy chuẩn, hàm mất mát $f(\mathbf{z})$ là hàm lỗi trung trung bình
 bình phương (\textit{mean squared error - MSE}), vector $\mathbf{z}$ biểu diễn trọng 
 số của các thuộc tính và $\mathcal{Z} = \mathbb{R}^p$. Hiệu chỉnh elastic-net trong 
-phương trình \ref{eq:3.1} chính là công thức Lasso khi $\lambda_2 = 0$ và trở thành công 
+phương trình \ref{eq:3} chính là công thức Lasso khi $\lambda_2 = 0$ và trở thành công 
 thức hồi quy Ridge khi $\lambda_1 = 0$. (Zou and Hastie 2005) đã chỉ ra rằng hiệu chỉnh 
 elastic-net có thể chọn ra 1 nhóm các thuộc tính tương quan mạnh, mà có thể khắc phục sự 
 thiếu sót của việc chọn lựa thuộc tính nhiều chiều khi sử dụng 1 mình hồi quy Lasso 

@@ -9,6 +9,7 @@ methods - FGM}) sử dụng gradient $\nabla J$ của hàm mất mát trong tậ
 $\mathbf{x}$ được tính bằng công thức:
 \begin{equation}
     \mathbf{x} = \mathbf{x_0} - \epsilon \times \text{sign}(\nabla J(\mathbf{x_0}, t))
+    \label{eq:1}
 \end{equation}
 Trong đó $\epsilon$ là độ biến dạng $L_{\infty}$ giữa $\mathbf{x}$ và $\mathbf{x_0}$ và 
 $\text{sign}(\nabla J)$ là dấu của gradient. Với tấn công $L_1$ và $L_2$, $\mathbf{x}$ 
@@ -16,6 +17,7 @@ $\text{sign}(\nabla J)$ là dấu của gradient. Với tấn công $L_1$ và $L
 \begin{equation}
     \mathbf{x} = \mathbf{x_0} - \epsilon \frac{\nabla J(\mathbf{x_0}, t)}
     {\lVert \nabla J(\mathbf{x_0}, t) \rVert _q}
+    \label{eq:2}
 \end{equation}
 với $q = 1,2$ và $\epsilon$ là độ nhiễu tương quan. Các phương pháp lặp đạo hàm nhanh 
 (\textit{Iterative fast gradient methods (I-FGM)}) được trình bày trong (Kurakin, Goodfellow, 
