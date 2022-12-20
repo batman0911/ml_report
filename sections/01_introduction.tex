@@ -4,7 +4,7 @@ và trí tuệ nhân tạo như phân loại ảnh, nhận diện giọng nói, 
 Mặc dù DNNs rất hiệu quả nhưng một số nghiên cứu gần đây đã chứng minh DNNs rất 
 dễ  "tổn thương" với các mẫu đối nghịch (Szegedy et al. 2013; Goodfellow, Shlens, 
 and Szegedy 2015). Ví dụ, một hình ảnh với nhiễu được thiết kế cẩn thận có thể
-làm cho một DNN đã được huấn luyện phân loại sai. Tệ hơn nữa, các mẫu đối nghịch
+làm cho một DNN đã được huấn luyện phân loại sai. Hơn nữa, các mẫu đối nghịch
 được tạo ra hầu như không thể phân biệt được bằng mắt người. 
 \begin{figure}[H] % places figure environment here   
     \centering % Centers Graphic
@@ -32,24 +32,24 @@ chuyển giao (\textit{transfer attacks}) nhằm mục đích tạo ra các mẫ
 từ mô hình DNN này sang mô hình DNN khác. Ngoài việc đánh giá mức độ mạnh mẽ của DNNs,
 Các mẫu đối nghịch có thể được sử dụng để huấn luyện một mô hình mạnh có khả năng chống chịu 
 với những xáo trộn của đối nghịch, được gọi là huấn luyện đối nghịch (\textit{adverarial training}) 
-(Madry et al. 2017). Chúng cũng có được sử dụng để giải thích DNNs (Koh và Liang 2017;
+(Madry et al. 2017). Chúng cũng có thể được sử dụng để giải thích DNNs (Koh và Liang 2017;
 Dong et al. 2017). 
 
-Trong bài báo này, chúng tôi sử dụng các mẫu đối nghịch để tấn công phân loại ảnh dựa trên 
-mạng nơ ron tích chập. Mẫu đối nghịch được tạo ra để làm sai lệch kết quả dự đoán và phải đảm bảo
-hình mới tạo ra giống với hình gốc. Trong quá khứ, sự giống nhau giữa mẫu đối nghịch được tạo
-ra và hình gốc được đo bằng các tham số độ méo (\textit{distortion metrics}) khác nhau.
+Trong bài báo này, tác giả sử dụng các mẫu đối nghịch để tấn công phân loại ảnh dựa trên 
+mạng neuron tích chập. Mẫu đối nghịch được tạo ra để làm sai lệch kết quả dự đoán và phải đảm bảo
+hình mới tạo ra (gần) giống với hình gốc. Trong quá khứ, sự giống nhau giữa mẫu đối nghịch được tạo
+ra và hình gốc được đo bằng các độ đo nhiễu (\textit{distortion metrics}) khác nhau.
 Một metric thường được sử dụng là chuẩn $L_q$ 
 với $\lVert x \rVert_q = \left( \sum_{i=1}^p |x_i|^q \right)^{\frac{1}{q}}$ kí hiệu chuẩn $L_q$
 của vector $p$ chiều $x = [x_1, ..., x_p]$ với $q \geq 1$. Đặc biệt, khi tạo ra các mẫu đối nghịch
-, độ méo $L_{\infty}$ được sử dụng để đánh giá sự thay đổi tối đa giá trị pixel (Goodfellow, 
-Shlens, and Szegedy 2015), trong khi độ méo $L_2$ được sử dụng để cải thiện chất lượng hình 
+, độ nhiễu $L_{\infty}$ được sử dụng để đánh giá sự thay đổi tối đa giá trị pixel (Goodfellow, 
+Shlens, and Szegedy 2015), trong khi độ nhiễu $L_2$ được sử dụng để cải thiện chất lượng hình 
 ảnh (Carlini and Wagner 2017b). Tuy nhiên, trong thực tế, chuẩn $L_1$ được sử dụng rộng rãi 
-trong các bài toán phục hồi ảnh (Fu et al. 2006) cũng như phục hồi tính thưa (Candès and Wakin 2008),
+trong các bài toán phục hồi ảnh (Fu et al. 2006) cũng như phục hồi tính thưa (Candès and Wakin 2008).
 Các mẫu đối nghịch dựa trên $L_1$ chưa được xem xét một cách kĩ càng. Trong bài toán mẫu đối nghịch,
 độ biến dạng $L_1$ đánh giá tổng các thay đổi trong nhiễu loạn và đóng vai trò là một thành phần
 (hàm) lồi đo lường số lượng pixel thay đổi (độ thưa) gây ra bởi nhiễu. Để lấp đầy khoảng trống
-này, chúng tôi xem xét một thuật toán tân công dựa trên hiệu chỉnh \textit{elastic-net}, được 
+này, chúng tôi xem xét một thuật toán tấn công dựa trên hiệu chỉnh \textit{elastic-net}, được 
 gọi là tấn công elastic-net vào DNNs (elastic-net attacks to DNNs - EAD). Hiệu chỉnh 
 elastic-net là tổ hợp tuyến tính của các hàm penalty $L_1$ và $L_2$ và nó cũng là công cụ 
 tiêu chuẩn cho bài toán lựa chọn tính chất đặc trưng cho dữ liệu nhiều chiều (Zou and Hastie 2005). 
@@ -62,13 +62,13 @@ dữ liệu MNIST, CIFAR10, và ImageNet trong các tình huống tấn công kh
 phương pháp tấn công hiện có dựa trên $L_2$ và $L_{\infty}$ (Kurakin, Goodfellow, and 
 Bengio 2016b; Carlini and Wagner 2017b), EAD có thể đạt được tỉ lệ tấn công thành công tương 
 tự khi phá vỡ DNNs được phòng thủ hoặc không phòng thủ (Papernot et al. 2016b). Quan trọng 
-hơn, chúng tôi chỉ ra rằng, tấn công $L_1$ đạt được hiệu suất vượt trội so với các cuộc tấn
-công $L_2$ và $L_{\infty}$ trong các cuộc tấn công chuyển giao với các mẫu đổi thủ được huấn
+hơn, tác giả chỉ ra rằng, tấn công $L_1$ đạt được hiệu suất vượt trội so với các cuộc tấn
+công $L_2$ và $L_{\infty}$ trong các cuộc tấn công chuyển giao với các mẫu đổi nghịch được huấn
 luyện bổ sung. Với tập dữ liệu khó nhất (MNIST), các kết quả từ EAD cải thiện tấn công chuyển 
 giao vào DNN không được phòng thủ hay được phòng thủ đạt tỉ lệ thành công gần $99\%$. Thêm vào 
-đó việc huận luyện kèm theo với mẫu đối nghịch dựa trên $L_1$ và $L_2$ có thể tăng cường khả 
-năng phục hổi của DNNs đối với các nhiễu loạn. Những kết quả này gợi ý rằng EAD mang lại tập 
+đó việc huấn luyện kèm theo với mẫu đối nghịch dựa trên $L_1$ và $L_2$ có thể tăng cường khả 
+năng phục hồi của DNNs đối với các nhiễu loạn. Những kết quả này gợi ý rằng EAD mang lại tập 
 mẫu đối nghịch khác biệt nhưng hiệu quả hơn. Hơn thế nữa, đánh giá các cuộc tấn công dựa trên 
-độ méo $L_1$ cung cấp thêm hiểu biết mới về học máy đối kháng và sự bảo mật của DNNs, gợi 
+độ nhiễu $L_1$ cung cấp thêm hiểu biết mới về học máy đối kháng và sự bảo mật của DNNs, gợi 
 ý rằng $L_1$ có thể bổ sung cho $L_2$ và $L_{\infty}$ thúc đẩy các framework về học máy đối 
 kháng hoàn thiện hơn.

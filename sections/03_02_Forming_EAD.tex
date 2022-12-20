@@ -29,12 +29,12 @@ và lớp dự đoán gần nhất khác với $t$. Với tấn công không nh�
 phương trình \ref{eq:3.2} trở thành:
 \begin{equation}
     \label{eq:3.4}\
-    f(x) = \max { \left([\textbf{Logit}(\mathbf{x})]_{t_0} - 
+    f(\mathbf{x}) = \max { \left([\textbf{Logit}(\mathbf{x})]_{t_0} - 
     \max_{j \neq t} [\textbf{Logit}(\mathbf{x})]_j, -\kappa \right) }
 \end{equation}
 Trong bài viết này, chúng tôi tập trung vào tấn công nhắm mục tiêu vì nó khó hơn là không 
 nhắm mục tiêu. Thuật toán EAD có thể được áp dụng trực tiếp vào tấn công không nhắm mục 
-tiêu bằng cách thay $f(x,t)$ trong phương trình \ref{eq:3.2} thành $f(x)$ trong phương 
+tiêu bằng cách thay $f(\mathbf{x},t)$ trong phương trình \ref{eq:3.2} thành $f(\mathbf{x})$ trong phương 
 trình \ref{eq:3.4}. 
 
 Ngoài ra, để thao túng kết quả dự đoán thông qua hàm mất mát trong \ref{eq:3.2}, hiệu chỉnh 
@@ -44,12 +44,12 @@ vào mạng DNNs (EAD) để tạo ra mẫu đối nghịch $(\mathbf{x},t)$ cho
     \label{eq:3.5}
     \begin{split}
     &\text{minimize}_{\mathbf{x}} \text{ }
-    c \times f(\mathbf{x}, t) + \beta \lVert \mathbf{x} - x_0 \rVert_1
+    c \times f(\mathbf{x}, t) + \beta \lVert \mathbf{x} - \mathbf{x_0} \rVert_1
     + \lVert \mathbf{x} - \mathbf{x_0} \rVert_2^2 \\
     &\text{st   } \mathbf{x} \in [0,1]^p
     \end{split}
 \end{equation}
-Với $f(x,t)$ được xác định trong phương trình \ref{eq:3.2}, $c, \beta \geq 0$ lần lượt 
+Với $f(\mathbf{x},t)$ được xác định trong phương trình \ref{eq:3.2}, $c, \beta \geq 0$ lần lượt 
 là các tham số  hiệu chỉnh của hàm mất mát $f$ và hàm phạt $L_1$. Miền ràng buộc 
 $\mathbf{x} \in [0,1]^p$ giữ cho $\mathbf{x}$ trong một không gian ảnh mà có thể dễ dàng thỏa mãn điều kiện
 bằng cách chia mỗi giá trị của pixel cho giá trị lớn nhất (ví dụ $255$). Để xác định Khoảng 
