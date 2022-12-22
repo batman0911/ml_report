@@ -3,8 +3,8 @@ Trong phần này, tác giả tổng hợp các nghiên cứu liên quan về t�
 
 \section{Tấn công vào DNNs}
 \underline{FGM và I-FGM:} Kí hiệu $\mathbf{x_0}$ và $\mathbf{x}$ lần lượt là mẫu gốc và mẫu đối nghịch,
-$t$ là lớp mục tiêu cần tấn công. Các phương pháp đạo hàm nhanh (\textit{fast gradient 
-methods - FGM}) sử dụng gradient $\nabla J$ của hàm mất mát trong tập huấn luyện $J$ với $\mathbf{x_0}$
+$t$ là lớp mục tiêu cần tấn công. Các phương pháp gradient nhanh (\textit{fast gradient 
+methods - FGM}) sử dụng gradient $\nabla J$ của hàm mất mát $J$ tại $\mathbf{x_0}$
 để tạo ra các mẫu đối nghịch (Goodfellow, Shlens, and Szegedy 2015). Với tấn công $L_{\infty}$, 
 $\mathbf{x}$ được tính bằng công thức:
 \begin{equation}
@@ -12,44 +12,43 @@ $\mathbf{x}$ được tính bằng công thức:
     \label{eq:1}
 \end{equation}
 Trong đó $\epsilon$ là độ biến dạng $L_{\infty}$ giữa $\mathbf{x}$ và $\mathbf{x_0}$ và 
-$\text{sign}(\nabla J)$ là dấu của gradient. Với tấn công $L_1$ và $L_2$, $\mathbf{x}$ 
+$\text{sign}(\nabla J)$ trả về dấu của gradient. Với tấn công $L_1$ và $L_2$, $\mathbf{x}$ 
 được tính bằng công thức:
 \begin{equation}
     \mathbf{x} = \mathbf{x_0} - \epsilon \frac{\nabla J(\mathbf{x_0}, t)}
     {\lVert \nabla J(\mathbf{x_0}, t) \rVert _q}
     \label{eq:2}
 \end{equation}
-với $q = 1,2$ và $\epsilon$ là độ nhiễu tương quan. Các phương pháp lặp đạo hàm nhanh 
+với $q = 1,2$ và $\epsilon$ là độ nhiễu tương ứng. Các phương pháp lặp gradient nhanh 
 (\textit{Iterative fast gradient methods (I-FGM)}) được trình bày trong (Kurakin, Goodfellow, 
-and Bengio 2016b) là phương pháp lặp sửa dụng FGM với một độ nhiễu mịn hơn. Các cuộc tấn công 
-không nhắm mục tiêu sử dụng FGM và I-FGM có thể được thực hiện theo cách tương tự nhau. 
+and Bengio 2016b) là phương pháp lặp sửa dụng FGM với một độ nhiễu mịn hơn. Tấn công 
+không nhắm đích sử dụng FGM và I-FGM cũng được triển khai theo cách tương tự. 
 
-\underline{C\&W attack:} Thay vì sử dụng hàm mất mát trên tập huấn luyện Carlini và Wagner
+\underline{Tấn công C\&W:} Thay vì sử dụng hàm mất mát trên tập huấn luyện Carlini và Wagner
 đã thiết kế  một hiệu chỉnh $L_2$ trong hàm mất mát dựa trên lớp logit trong DNNs để sinh 
 ra các mẫu đối nghịch (Carlini and Wagner 2017b). Công thức này hóa ra là một trường hợp riêng của 
 thuật toát EAD (sẽ được trình bày trong phần sau). Tấn công C\&W được coi 
-là một trong những tấn công mạnh nhất đối với DNNs vì nó có thể phá vỡ cả những DNNs được 
-phòng thủ và chắt lọc, nó cũng có thể đạt được hiệu suất đáng kể với tấn công chuyển giao. 
+là một trong những tấn công mạnh nhất đối với DNNs vì nó có thể phá vỡ cả những DNN không phòng thủ và DNN phòng thủ chắt lọc, nó cũng có khả năng chuyển giao tấn công khá tốt. 
 
-\underline{DeepFool:} là một thuật toán tấn công không nhắm mục tiêu $L_2$ (Moosavi-Dezfooli, 
+\underline{DeepFool:} là thuật toán tấn công $L_2$ không nhắm đích (Moosavi-Dezfooli, 
 Fawzi, and Frossard 2016) dựa trên lý thuyết về phép chiếu tới siêu phẳng phân tách gần nhất
-trong phân lớp. Nó cũng được sử dụng để tạo ra một nhiễu loạn phổ quát nhằm đánh lừa 
-các DNNs được huấn luyện trên các hình ảnh tự nhiên (Moosavi-Dezfooli et al. 2016).
+trong bài toán phân lớp. Nó cũng được sử dụng để tạo ra một nhiễu loạn phổ quát nhằm đánh lừa 
+các DNN vốn đã được huấn luyện trên các ảnh gốc (Moosavi-Dezfooli et al. 2016).
 
 \section{Phòng thủ trong DNNs}
-\underline{Defensive distillation:} Chưng cất phòng thủ (Papernot et al.2016b) bảo vệ 
-chống lại sự nhiễu loạn của đối nghịch bằng cách sử dụng kỹ thuật chưng cất trong (Hinton, 
+\underline{Chắt lọc phòng thủ (Defensive distillation):} Chắt lọc phòng thủ (Papernot et al.2016b) 
+chống lại nhiễu loạn đối nghịch bằng cách sử dụng kỹ thuật chắt lọc trong (Hinton, 
 Vinyals, and Dean 2015) để huấn luyện lại cùng một mạng với xác suất lớp được dự đoán bởi 
 mạng ban đầu. Phương pháp này đưa ra tham số nhiệt độ $T$ trong lớp softmax để tăng cường 
-độ mạnh đối với những xáo trộn của mẫu đối nghịch.
+sức mạnh của mạng trước những nhiễu loạn đối nghịch.
 
-\underline{Adversarial training:} Có thể được triển khai theo 1 số cách khác nhau. 
+\underline{Huấn luyện đối nghịch (Advrsarial training):} có thể được triển khai theo 1 số cách khác nhau. 
 Hướng tiếp cận chuẩn là thêm vào tập dữ liệu huấn luyện ban đầu các mẫu đối nghịch đã được 
 sửa đúng nhãn, sau đó huấn luyện lại mạng. (Zheng et al. 2016; Madry et al. 2017; 
 Tram`er et al. 2017; Zantedeschi, Nicolae, and Rawat 2017) đề xuất điều chỉnh training 
 loss hoặc kiến trúc mạng để tăng cường sức mạnh của DNNs trước mẫu đối nghịch.
 
-\underline{Detection methods:} Sử dụng các test thống kê để phân biệt các mẫu đối nghịch 
+\underline{Các phương pháp phát hiện:} Sử dụng các test thống kê để phân biệt các mẫu đối nghịch 
 với mẫu gốc (Feinman et al. 2017; Grosse et al. 2017; Lu, Issaranon, and Forsyth 2017; 
 Xu, Evans, and Qi 2017). Tuy nhiên, 10 phương pháp phát hiện khác nhau đã không thể phát 
 hiện được tấn công C\&W (Carlini and Wagner 2017a).

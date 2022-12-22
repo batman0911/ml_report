@@ -1,7 +1,7 @@
 \section{Xây dựng thuật toán EAD}
 
-Từ tấn công C\&W (Carlini and Wagner 2017b), ta thêm vào cùng hàm mất mát $f$ để sinh 
-ra các mẫu đối nghịch. Đặc biệt, cho trước 1 ảnh $\mathbf{x_0}$ và nhãn đúng của nó là $t_0$, 
+Từ ý tưởng của tấn công C\&W (Carlini and Wagner 2017b), ta xem xét cùng hàm mất mát $f$ để sinh 
+ra các mẫu đối nghịch. Cụ thể, cho trước 1 ảnh $\mathbf{x_0}$ với nhãn đúng của nó là $t_0$, 
 gọi $\mathbf{x}$ là mẫu đối nghịch của $\mathbf{x_0}$ với lớp đích nhắm đến là $t \neq t_0$ . Hàm mất mát 
 $f(\mathbf{x})$ cho tấn công nhắm đích là:
 \begin{equation}
@@ -9,10 +9,10 @@ $f(\mathbf{x})$ cho tấn công nhắm đích là:
     f(\mathbf{x}, t) = \max { \left( \max_{j \neq t} [\textbf{Logit}(\mathbf{x})]_j - 
     [\textbf{Logit}(\mathbf{x})]_t, -\kappa \right) }
 \end{equation}
-Trong đó $\textbf{Logit}(\mathbf{x}) = [\textbf{Logit}(\mathbf{x})_1, ..., 
-\textbf{Logit}(\mathbf{x})_K] 
+Trong đó $\textbf{Logit}(\mathbf{x}) = [[\textbf{Logit}(\mathbf{x})]_1, ..., 
+[\textbf{Logit}(\mathbf{x})]_K] 
 \in \mathbb{R}^K$ là lớp logit (lớp trước softmax) biểu diễn cho $\mathbf{x}$ trong mạng DNN, $K$
-là số lượng lớp cần phân loại, $\kappa > 0$ là tham số tin cậy, nó đảm bảo một khoảng 
+là số lượng lớp cần phân loại, $\kappa > 0$ là tham số độ tin cậy, nó đảm bảo một khoảng 
 cách cố định giữa $\max_{j \neq t} [\textbf{Logit}(\mathbf{x})]_j$ và $[\textbf{Logit}(\mathbf{x})]_t$. 
 
 Cần lưu ý rằng, thành phần $[\textbf{Logit}(x)]_t$ là xác xuất dự đoán $x$ có nhãn $t$ theo 
@@ -23,19 +23,17 @@ luật phân loại của hàm softmax:
         \sum_{j=1}^{K} \exp([\textbf{Logit}(\mathbf{x})]_j)
     }
 \end{equation}
-Do đó, hàm mất mát trong phương trình \ref{eq:4} có mục đích là để cho ra nhãn $t$ là 
+Do đó, hàm mất mát trong \ref{eq:4} có mục đích là cho ra nhãn $t$ là 
 lớp có xác xuất cao nhất của $x$ và tham số $\kappa$ đảm bảo sự phân biệt giữa lớp $t$
-và lớp dự đoán gần nhất khác với $t$. Với tấn công không nhắm mục tiêu, hàm mất mát trong 
-phương trình \ref{eq:4} trở thành:
+và lớp dự đoán gần nhất khác với $t$. Với tấn công không nhắm đích, hàm mất mát trong 
+\ref{eq:4} trở thành:
 \begin{equation}
     \label{eq:6}\
     f(\mathbf{x}) = \max { \left([\textbf{Logit}(\mathbf{x})]_{t_0} - 
     \max_{j \neq t} [\textbf{Logit}(\mathbf{x})]_j, -\kappa \right) }
 \end{equation}
-Trong bài viết này, chúng tôi tập trung vào tấn công nhắm mục tiêu vì nó khó hơn là không 
-nhắm mục tiêu. Thuật toán EAD có thể được áp dụng trực tiếp vào tấn công không nhắm mục 
-tiêu bằng cách thay $f(\mathbf{x},t)$ trong phương trình \ref{eq:4} thành $f(\mathbf{x})$ trong phương 
-trình \ref{eq:6}. 
+Trong bài viết này, tác giả tập trung vào tấn công nhắm đích vì nó khó hơn so với tấn công không 
+nhắm đích. Thuật toán EAD có thể được áp dụng trực tiếp vào tấn công không nhắm đích bằng cách thay $f(\mathbf{x},t)$ trong \ref{eq:4} thành $f(\mathbf{x})$ trong \ref{eq:6}. 
 
 Ngoài ra, để thao túng kết quả dự đoán thông qua hàm mất mát trong \ref{eq:4}, hiệu chỉnh 
 elastic-net còn tạo ra mẫu đối nghịch tương tự với ảnh gốc. Công thức tấn công elastic-net
@@ -49,17 +47,17 @@ vào mạng DNNs (EAD) để tạo ra mẫu đối nghịch $(\mathbf{x},t)$ cho
     &\text{st   } \mathbf{x} \in [0,1]^p
     \end{split}
 \end{equation}
-Với $f(\mathbf{x},t)$ được xác định trong phương trình \ref{eq:4}, $c, \beta \geq 0$ lần lượt 
+Với $f(\mathbf{x},t)$ được xác định trong \ref{eq:4}, $c, \beta \geq 0$ lần lượt 
 là các tham số  hiệu chỉnh của hàm mất mát $f$ và hàm phạt $L_1$. Miền ràng buộc 
 $\mathbf{x} \in [0,1]^p$ giữ cho $\mathbf{x}$ trong một không gian ảnh mà có thể dễ dàng thỏa mãn điều kiện
-bằng cách chia mỗi giá trị của pixel cho giá trị lớn nhất (ví dụ $255$). Để xác định Khoảng 
+bằng cách chia giá trị của mỗi điểm ảnh cho giá trị lớn nhất (ví dụ $255$). Để xác định khoảng 
 cách (nhiễu) giữa $\mathbf{x}$ và $\mathbf{x_0}$ bằng $\mathbf{\delta} = \mathbf{x} - \mathbf{x_0}$,
 công thức EAD trong \ref{eq:7} được tạo ra để tìm một mẫu đối nghịch $\mathbf{x}$ mà sẽ 
 được phân loại vào lớp mục tiêu $t$, đồng thời cực tiểu hóa $\mathbf{\delta}$ trong hàm
 mất mát elastic-net $\beta \lVert \mathbf{\delta} \rVert_1 + \lVert \mathbf{\delta} \rVert_2^2$.
 Đáng chú ý, công thức tấn công C\&W (Carlini and Wagner 2017b) trở thành trường hợp đặc biệt 
-của EAD trong công thức \ref{eq:7} khi $\beta = 0$ , không phụ thuộc vào $L_1$ của $\mathbf{\delta}$.
-Tuy nhiên thành phần phạt $L_1$ là một hiệu trực quan để tạo ra mẫu đối nghịch do 
+của EAD trong công thức \ref{eq:7} khi $\beta = 0$, không phụ thuộc vào $L_1$ của $\mathbf{\delta}$.
+Tuy nhiên thành phần phạt $L_1$ là một hiệu chỉnh trực quan để tạo ra mẫu đối nghịch do 
 $\lVert \mathbf{\delta} \rVert_1 = \sum_{i=1}^p |\mathbf{\delta_i}|$ biểu diễn tổng sai khác
 của nhiễu và được sử dụng rộng rãi như là hàm thay thế để phát triển các nhiễu thưa. 
 Phần đánh giá hiệu năng sẽ chứng minh rằng khi đưa thành phần $L_1$ vào nhiễu sẽ sinh ra 
