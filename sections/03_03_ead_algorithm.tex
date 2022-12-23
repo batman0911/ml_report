@@ -1,17 +1,17 @@
 \section{Thuật toán EAD}
 Khi giải bài toán EAD trong \ref{eq:7} mà không có thành phần $L_1$, Carlini and Wagner 
-sử dụng kĩ thuật COV (change-of-variable) qua hàm \textit{tanh} trên $\mathbf{x}$ nhằm 
+sử dụng kĩ thuật COV (change-of-variable, kỹ thuật đổi biến) qua hàm \textit{tanh} trên $\mathbf{x}$ nhằm 
 mục đích loại bỏ ràng buộc $\mathbf{x} \in [0,1]^p$ (Carlini and Wagner 2017b). Khi 
 $\beta > 0$, ta thấy COV sẽ không hiệu quả để giải bài toán \ref{eq:7} vì mẫu đối 
 nghịch tương ứng sẽ không nhạy cảm với thay đổi trên $\beta$ (xem phần đánh giá hiệu 
 năng để biết chi tiết). Vì $L_1$ không khả vi trên toàn không gian, COV không giải 
-được bài toán \ref{eq:7} do không dùng được phương pháp dưới đạo hàm (\textit{subgradient})
+được bài toán \ref{eq:7} do không hiệu quả khi sử dụng phương pháp dưới đạo hàm (\textit{subgradient})
 trong việc giải bài toán tối ưu (Duchi and Singer 2009). 
 
-Để giải bài toán EAD trong \ref{eq:7} để sinh ra các mẫu đối nghịch, bài viết này đề
+Để giải bài toán EAD trong \ref{eq:7} nhằm sinh ra các mẫu đối nghịch, tác giả đề
 xuất sử dụng thuật toán ISTA (\textit{iterative shrinkage-thresholding algorithm – thuật toán lặp 
 với ngưỡng biến đổi}) (Beck and Teboulle 2009). ISTA là một thuật toán tối ưu bậc nhất
-phổ biến, ISTA thêm một bước điều chỉnh ngưỡng trong mỗi bước lặp. Cụ thể, 
+phổ biến, trong đó thêm một bước điều chỉnh ngưỡng trong mỗi bước lặp. Cụ thể, 
 đặt $g(\mathbf{x}) = c \times f(\mathbf{x}) + \lVert \mathbf{x} - \mathbf{x_0} \rVert_2^2$
 và đặt $\nabla g(\mathbf{x})$ là gradient của $g(\mathbf{x})$ được tính bởi mạng DNN. 
 Tại bước lặp thứ $k+1$, mẫu đối nghịch $\mathbf{x}^{(k+1)}$ của $\mathbf{x_0}$ được tính 
@@ -36,7 +36,7 @@ $\mathbf{z}_i$ được co lại với hệ số $\beta$ và chiếu thành ph�
 chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu $|\mathbf{z}_i - \mathbf{x_0}_i| \leq \beta$
 , nó đặt ngưỡng $\mathbf{z}_i$ bằng cách thiết lập $[S_{\beta}(\mathbf{z})]_i = \mathbf{x_0}_i$.
 Chứng minh thuật toán tối ưu sử dụng \ref{eq:8} để giải bài toán EAD trong \ref{eq:7}
-được trình bày trong tài liệu \footnote{https://arxiv.org/abs/1709.04114}
+được trình bày trong tài liệu \footnote{https://arxiv.org/abs/1709.04114}. Chú ý rằng, vì $g(\mathbf{x})$ là hàm mục tiêu của tấn công C\&W (Carlini and Wagner 2017b), thuật toán ISTA trong \ref{eq:8} có thể coi như 1 phiên bản mạnh hơn của phương pháp C\&W trong đó biến đổi giá trị điểm ảnh của mẫu đối nghịch nếu nó sai khác nhiều hơn $\beta$ so với điểm ảnh gốc, hoặc giữ nguyên giá trị điểm ảnh gốc nếu sự sai khác nhỏ hơn $\beta$.
 
 \begin{center}
 	\begin{tabular}{lll}
@@ -47,7 +47,7 @@ Chứng minh thuật toán tối ưu sử dụng \ref{eq:8} để giải bài to
 		& \multicolumn{2}{l}{\textbf{Output}: adversarial example $\mathbf{x}$} \\
 		& \multicolumn{2}{l}{Initialization: $\mathbf{x}^{(0)}$ = $\mathbf{y}^{(0)}$ = $\mathbf{x}_0$} \\
 		& \multicolumn{2}{l}{\textbf{for} $k = 0$ to $I - 1$ do} \\
-		&& $\mathbf{x}^{(k=1)} = S_{\beta}(\mathbf{y}^{(k)} -\alpha_{k} \nabla g(\mathbf{y}^{(k)}))$ \\
+		&& $\mathbf{x}^{(k+1)} = S_{\beta}(\mathbf{y}^{(k)} -\alpha_{k} \nabla g(\mathbf{y}^{(k)}))$ \\
 		&& $\mathbf{y}^{(k+1)} = \mathbf{x}^{(k+1)} + \frac{k}{k+3} (\mathbf{x}^{(k+1)} - \mathbf{x}^{(k)}) $ \\
 		& \multicolumn{2}{l}{\textbf{end for}} \\
 		& \multicolumn{2}{p{14cm}}{Decision rule: determine $\mathbf{x}$ from successful examples in $\{\mathbf{x}^k\}_{k=1}^{I}$ (EN rule or $L_1$ rule).}\\
@@ -59,9 +59,9 @@ Chứng minh thuật toán tối ưu sử dụng \ref{eq:8} để giải bài to
 Thuật toán EAD để tạo mẫu đối nghịch được tổng kết với mã giả trên. Để tính toán hiệu quả,
  ta triển khai FISTA (fast ISTA) cho EAD, nó sẽ cho tốc độ hội tụ tối ưu với phương pháp 
  tối ưu hóa bậc 1 (Beck and Teboulle 2009). Vector $\mathbf{y}^{(k)}$ trong thuật toán 1 
- kết hợp với momen trong $\mathbf{x}^{(k)}$. Trong phép lặp EAD, bước lặp $\mathbf{y}^{(k)}$ 
+ kết hợp với momen trong $\mathbf{x}^{(k)}$ để tăng tốc hội tụ. Trong thực nghiệm, tác giả khởi tạo learning rate $\alpha_0 = 0.01$ với tham số squared root decay $k$. Trong phép lặp EAD, bước lặp $\mathbf{x}^{(k)}$ 
  được coi là mẫu đối nghịch thành công của $\mathbf{x_0}$ nếu mô hình dự báo thành lớp 
  đích $t$. Mẫu đối nghịch $\mathbf{x}$ cuối cùng được lựa chọn từ tất cả các mẫu đối nghịch 
  thành công. Trong bài viết này, chúng ta xem xét 2 luật để chọn $\mathbf{x}$ từ tập các 
- mẫu đối nghịch thành công: elastic-net tối thiểu (EN) và nhiễu $L_1$ tương ứng với $\mathbf{x_0}$.
+ mẫu đối nghịch thành công: elastic-net tối thiểu (EN) và nhiễu $L_1$ tại $\mathbf{x_0}$.
 Sự ảnh hưởng của $\beta$, $\kappa$  và luật quyết định lên EAD sẽ được nghiên cứu trong phần tiếp theo.

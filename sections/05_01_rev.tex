@@ -1,0 +1,14 @@
+\subsection{Thời gian tấn công}
+Trong quá trình thực nghiệm, chúng tôi nhận thấy rằng mặc dù tỉ lệ tấn công thành công (ASR) của phương pháp EAD là rất tốt (100\% trên cả 3 tập dữ liệu) cùng với nhiễu $L_1$ nhỏ, tuy nhiên điều này đánh đổi bằng thời gian tấn công rất lâu. Chúng tôi đã tiến hành tấn công bằng máy tính cá nhân (CPU Intel i7 12700, 32GB RAM, GPU RTX 3070Ti) và cho ra thời gian tấn công như sau.
+\begin{longtable}{l}
+	\begin{tabular}{l|lllll}
+		\hline
+		Phương pháp & EAD-EN & FGM-L1 & FGM-L2 & IFGM-L1 & IFGM-L2 \\
+		\hline
+        Thời gian (s) & 42810 & 893 & 1034 & 3366 &	9922 \\
+        \hline
+	\end{tabular} \\
+	\caption[Thời gian tính toán]{Thời gian tấn công của các thuật toán trên tập cifar}
+	\label{tab:tab_4}
+\end{longtable}	
+Do giới hạn phần cứng, chúng tôi tiến hành tấn công trên tập cifar với 100 mẫu đối nghịch thay vì 1000 mẫu như bài báo gốc, $\beta = 10^{-2}$. Như đã chỉ ra trên bảng \ref{tab:tab_4} thời gian tấn công của thuật toán EAD với luật EN là khoảng 11 giờ và gấp khoảng 48 lần khi so sánh với thuật toán nhanh nhất là FGM-L1. 

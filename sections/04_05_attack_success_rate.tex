@@ -1,6 +1,28 @@
 \section{Tỷ lệ tấn công thành công và nhiễu trên các tập dữ liệu MNIST, CIFAR10 và ImageNet}
-Nhóm tác giả so sánh EAD với các phương pháp đối sánh trên các tiêu chí tỷ lệ tấn công thành công và các nhiễu khi tấn công mạng DNN huấn luyện bởi MNIST, CIFAR10 và ImageNet. Bảng \ref{tab:tab_2} là kết quả thực nghiệm. FGM ít tấn công thành công (chỉ số ASR thấp) và chỉ số nhiễu khá lớn so với các phương pháp khác. Trong khi đó, C\&W, I-FGM và EAD đều đạt ASR $100\%$. Ngoài ra, EAD, C\&W và I-FGM-$L_{\infty}$ đạt được các mẫu đối nghịch với ít nhiễu nhất lần lượt trên các chỉ số  $L_1$, $L_2$ và $L_{\infty}$. Hơn nữa, EAD tốt hơn các phương pháp $L_1$ hiện tại (ví dụ I-FGM-$L_1$). So sánh với I-FGM-$L_1$, EAD với luật chọn EN giảm nhiễu $L_1$ xuống xấp xỉ $47\%$ trên tập MNIST, $53\%$ với tập CIFAR10 và $87\%$ với ImageNet. Tác giả cũng báo cáo kết quả quan sát rằng EAD với luật chọn $L_1$ có thể giảm nhiễu $L_1$ nhưng làm tăng $L_2$ và $L_{\infty}$.
+\begin{longtable}{l}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{l|llll|llll|llll}
+			\hline
+			& \multicolumn{4}{c}{MNIST} & \multicolumn{4}{c}{CIFAR 10} & \multicolumn{4}{c}{ImageNet}\\
+			\hline
+			Attack method & ASR & $L_1$ & $L_2$ & $L_\infty$ & ASR & $L_1$ & $L_2$ & $L_\infty$ & ASR & $L_1$ & $L_2$ & $L_\infty$ \\
+			\hline
+			C\&W ($L_2$) & \textbf{100} & 22.46 & \textbf{1.972} & 0.514 & \textbf{100} & 13.62 & \textbf{0.392} & 0.044 & \textbf{100} & 232.2 & \textbf{0.705} & 0.03 \\
+			FGM-$L_1$ & 39 & 53.5 & 4.186 & 0.782 & 48.8 & 51.97 & 1.48 & 0.152 & 1 & 61 & 0.187 & 0.007 \\
+			FGM-$L_2$ & 34.6 & 39.15 & 3.284 & 0.747 & 42.8 & 39.5 & 1.157 & 0.136 & 1 & 2338 & 6.823 & 0.25 \\
+			FGM-$L_\infty$ & 42.5 & 127.2 & 6.09 & 0.296 & 52.3 & 127.81 & 2.373 & 0.047 & 3 & 3655 & 7.102 & 0.014 \\
+			I-FGM-$L_1$ & \textbf{100} & 32.94 & 2.606 & 0.591 & \textbf{100} & 17.53 & 0.502 & 0.055 & 77 & 526.4 & 1.609 & 0.054 \\
+			I-FGM-$L_2$ & \textbf{100} & 30.32 & 2.41 & 0.561 & \textbf{100} & 17.12 & 0.489 & 0.054 & \textbf{100} & 774.1 & 2.358 & 0.086 \\
+			I-FGM-$L_\infty$ & \textbf{100} & 71.39 & 3.472 & \textbf{0.227} & \textbf{100} & 33.3 & 0.68 & \textbf{0.018} & \textbf{100} & 864.2 & 2.079 & \textbf{0.01} \\
+			EAD (EN rule) & \textbf{100} & \textbf{17.4} & 2.001 & 0.594 & \textbf{100} & \textbf{8.18} & 0.502 & 0.097 & \textbf{100} & \textbf{69.47} & 1.563 & 0.238 \\
+			EAD ($L_1$ rule) & \textbf{100} & \textbf{14.11} & 2.211 & 0.768 & \textbf{100} & \textbf{6.066} & 0.613 & 0.17 & \textbf{100} & \textbf{40.9} & 1.598 & 0.293 \\
+			\hline
+	\end{tabular}} \\ 
+	\caption{So sánh các tấn công trên các tập dữ liệu MNIST, CIFAR10 và ImageNet. ASR là tỷ lệ tấn công thành công (\%). Giá trị nhiễu trong bảng đo được trên giá trị trung bình của các mẫu thành công. EAD, C\&W và I-FGM-$L_\infty$ thu được các mẫu ít nhiễu nhất trên các chuẩn $L_1$,$L_2$,$L_\infty$ tương ứng. Kết quả đầy đủ được báo cáo trong tài liệu mở rộng.}
+	\label{tab:tab_2}
+\end{longtable}
+
+Tác giả so sánh EAD với các phương pháp đối sánh trên các tiêu chí tỷ lệ tấn công thành công và độ nhiễu khi tấn công mạng DNN huấn luyện bởi MNIST, CIFAR10 và ImageNet. Bảng \ref{tab:tab_2} là kết quả thực nghiệm trong trường hợp trung bình. FGM ít tấn công thành công (chỉ số ASR thấp) và chỉ số nhiễu khá lớn so với các phương pháp khác. Trong khi đó, C\&W, I-FGM và EAD đều đạt ASR $100\%$. Ngoài ra, EAD, C\&W và I-FGM-$L_{\infty}$ đạt được các mẫu đối nghịch với ít nhiễu nhất lần lượt trên các chỉ số  $L_1$, $L_2$ và $L_{\infty}$. Hơn nữa, EAD tốt hơn I-FGM-$L_1$. So sánh với I-FGM-$L_1$, EAD với luật chọn EN giảm nhiễu $L_1$ xuống xấp xỉ $47\%$ trên tập MNIST, $53\%$ với tập CIFAR10 và $87\%$ với ImageNet. Tác giả cũng báo cáo kết quả quan sát rằng EAD với luật chọn $L_1$ có thể giảm nhiễu $L_1$ nhưng làm tăng $L_2$ và $L_{\infty}$.
 
 
-
-Mặc dù có nhiễu $L_2$ và $L_{\infty}$ lớn, các mẫu đối nghịch tạo bởi EAD với luật chọn $L_1$ có thể đạt ASR $100\%$ trên tất cả các tập dữ liệu. Nghĩa là nhiễu $L_2$ và $L_{\infty}$ không đủ để đánh giá sức mạnh của mạng neuron. Hơn nữa, kết quả tấn công trong bảng 2 cho thấy EAD có thể thu được 1 tập phân biệt các mẫu đối nghịch khác biệt cơ bản với các mẫu dựa trên $L_2$ và $L_{\infty}$. Tương tự phương pháp C\&W và I-FGM, các mẫu đối nghịch sinh bởi EAD đều khó phân biệt bằng mắt thường. 
+Mặc dù có nhiễu $L_2$ và $L_{\infty}$ lớn, các mẫu đối nghịch tạo bởi EAD với luật chọn $L_1$ có thể đạt ASR $100\%$ trên tất cả các tập dữ liệu. Nghĩa là nhiễu $L_2$ và $L_{\infty}$ không đủ để đánh giá sức mạnh của mạng neuron. Hơn nữa, kết quả tấn công trong bảng \ref{tab:tab_2} cho thấy EAD có thể thu được 1 tập phân biệt các mẫu đối nghịch khác biệt cơ bản với các mẫu dựa trên $L_2$ và $L_{\infty}$. Tương tự phương pháp C\&W và I-FGM, các mẫu đối nghịch sinh bởi EAD đều khó phân biệt bằng mắt thường. 
