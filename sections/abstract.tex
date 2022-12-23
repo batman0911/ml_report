@@ -1,18 +1,15 @@
 \begin{abstract}
-    Các nghiên cứu gần đấy đã chỉ ra tính dễ bị tổn thương của các mạng neuron sâu 
-    (Deep Neural Networks - DNNs) đến các mẫu đối nghịch - một cách trực quan, hình ảnh
-    đối nghịch không thể phân biệt có thể được tạo ra một cách dễ dàng khiến các mô hình 
-    được huấn luyện tốt cũng phân loại ảnh sai. Các phương pháp hiện có để tạo ra mẫu 
-    đối nghịch thường dựa trên thông số biến dạng $L_2$ và $L_{\infty}$. Mặc dù trong 
-    thực tế độ biến dạng $L_1$ là quan trọng và quyết định đến tính thưa của nhiễu lại 
-    ít được xem xét. 
-    Trong bài này, tác giả thiết kế một quy trình tấn công DNNs thông qua mẫu đối nghịch
-    như một bài toán tối ưu hóa sử dụng hiệu chỉnh elastic-net. Tấn công DNNs bằng 
-    elastic-net (EAD) với tham số $L_1$ được thêm vào cùng với tấn công $L_2$. 
+    Các nghiên cứu gần đấy đã chỉ ra tính dễ bị tổn thương của mạng neuron sâu 
+    (Deep Neural Networks - DNNs) bởi các mẫu đối nghịch (adversarial examples). Mẫu đối nghịch là trường hợp 1 ảnh được chỉnh sửa sao cho ảnh vẫn có thể hiện thị giác không khác gì nhiều so với ảnh gốc, nhưng nó lại đánh lừa được các mô hình phân lớp, kiến việc phân lớp bị sai. Các phương pháp hiện có để tạo ra mẫu 
+    đối nghịch thường dựa trên các biến dạng $L_2$ và $L_{\infty}$. Biến dạng $L_1$ thể hiện tổng sai khác và làm tăng tính thưa của nhiễu, tuy nhiên thực té nó vẫn ít được sử dụng để tạo ra các mẫu đối nghịch. 
+    
+    Trong bài này, tác giả thiết kế một quy trình tấn công DNNs bằng mẫu đối nghịch
+    thông qua bài toán tối ưu hiệu chỉnh elastic-net. Tấn công DNNs bằng 
+    elastic-net (EAD) với tham số $L_1$ được thêm vào cùng với $L_2$. 
     Kết quả thực nghiệm trên các tập dữ liệu MNIST, CIFAR10 và ImageNet chỉ ra rằng
     EAD có thể mang lại một tập mẫu đối nghịch với độ nhiễu $L_1$ nhỏ và đạt được hiệu 
     suất tấn công tương đương với các phương pháp hiện đại nhất qua các kịch bản tấn 
-    công khác nhau. Quan trọng hơn, EAD dẫn đến sự cải tiến trong việc tấn công DNNs và
-    gợi ý những hiểu biết mới về hiệu chỉnh $L_1$ để cải thiện bảo mật trong các mô 
+    công khác nhau. Quan trọng hơn, EAD hướng đến khả năng chuyển giao tấn công và huấn luyện đối nghịch bổ sung cho DNNs và
+    gợi ý việc học các đối nghịch $L_1$ để cải thiện bảo mật trong các mô 
     hình học máy.
 \end{abstract} 
