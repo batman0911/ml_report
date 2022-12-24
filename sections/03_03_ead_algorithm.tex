@@ -40,16 +40,16 @@ Chứng minh thuật toán tối ưu sử dụng (\ref{eq:8}) để giải bài 
 \begin{center}
 	\begin{tabular}{lll}
 		\hline 
-		\multicolumn{3}{l}{\textbf{Algorithm 1} Elastic-Net Attacks to DNNs (EAD)} \\
+		\multicolumn{3}{l}{\textbf{Thuật toán 1} Tấn công Elastic-net vào DNNs (EAD)} \\
 		\hline 
-		& \multicolumn{2}{p{14cm}}{\textbf{Input}: original labeled image ($\mathbf{x}_0$, $t_0$), target attack class $t$, attack transferability parameter $\kappa$, $L_1$ regularization parameter $\beta$, step size $\alpha_k$, \# of iterations $I$} \\
-		& \multicolumn{2}{l}{\textbf{Output}: adversarial example $\mathbf{x}$} \\
-		& \multicolumn{2}{l}{Initialization: $\mathbf{x}^{(0)}$ = $\mathbf{y}^{(0)}$ = $\mathbf{x}_0$} \\
+		& \multicolumn{2}{p{14cm}}{\textbf{Input}: Ảnh gốc và nhãn của nó ($\mathbf{x}_0$, $t_0$), lớp mục tiêu $t$, tham số chuyển giao $\kappa$, tham số hiệu chỉnh $\beta$, độ dài bước $\alpha_k$, số bước lặp $I$} \\
+		& \multicolumn{2}{l}{\textbf{Output}: mẫu đối nghịch $\mathbf{x}$} \\
+		& \multicolumn{2}{l}{Khởi tạo: $\mathbf{x}^{(0)}$ = $\mathbf{y}^{(0)}$ = $\mathbf{x}_0$} \\
 		& \multicolumn{2}{l}{\textbf{for} $k = 0$ to $I - 1$ do} \\
 		&& $\mathbf{x}^{(k+1)} = S_{\beta}(\mathbf{y}^{(k)} -\alpha_{k} \nabla g(\mathbf{y}^{(k)}))$ \\
 		&& $\mathbf{y}^{(k+1)} = \mathbf{x}^{(k+1)} + \frac{k}{k+3} (\mathbf{x}^{(k+1)} - \mathbf{x}^{(k)}) $ \\
 		& \multicolumn{2}{l}{\textbf{end for}} \\
-		& \multicolumn{2}{p{14cm}}{Decision rule: determine $\mathbf{x}$ from successful examples in $\{\mathbf{x}^k\}_{k=1}^{I}$ (EN rule or $L_1$ rule).}\\
+		& \multicolumn{2}{p{14cm}}{Luật quyết định: tìm $\mathbf{x}$ từ tập các mẫu thành công trong $\{\mathbf{x}^k\}_{k=1}^{I}$ (luật EN, luật $L_1$).}\\
 		\hline
 	\end{tabular}
 	\label{arg:ag_1}
