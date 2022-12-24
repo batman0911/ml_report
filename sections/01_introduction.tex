@@ -28,7 +28,7 @@ tấn công (\textit{attacks}) vào DNNs. Cụ thể, tấn công nhắm đích
 định sẵn; tấn công không nhắm đích (\textit{untargeted attacks}) để tạo ra các mẫu đối nghịch không được phân loại vào lớp ban đầu. Chuyển giao tấn công (\textit{transfer attacks}) nhằm mục đích tạo ra các mẫu đối nghịch có thể chuyển 
 từ mô hình DNN này sang mô hình DNN khác. Ngoài việc đánh giá mức độ mạnh mẽ của DNNs,
 các mẫu đối nghịch còn có thể được sử dụng để huấn luyện mô hình sao cho nó có khả năng chống chịu 
-với những xáo trộn của đối nghịch, gọi là huấn luyện đối nghịch (\textit{adverarial training}) 
+với những xáo trộn của đối nghịch, gọi là huấn luyện đối nghịch (\textit{adversarial training}) 
 (Madry et al. 2017). Chúng cũng có thể được sử dụng để cải tiến DNNs (Koh và Liang 2017;
 Dong et al. 2017). 
 
@@ -37,8 +37,7 @@ mạng neuron tích chập. Mẫu đối nghịch được tạo ra để làm s
 hình mới tạo ra (gần) giống với hình gốc. Trong trường hợp này, sự giống nhau giữa mẫu đối nghịch và hình gốc được đo bằng các độ đo nhiễu (\textit{distortion metrics}) khác nhau.
 Độ đo thường được sử dụng là chuẩn $L_q$ 
 với $\lVert x \rVert_q = \left( \sum_{i=1}^p |x_i|^q \right)^{\frac{1}{q}}$ kí hiệu chuẩn $L_q$
-của vector $p$ chiều $x = [x_1, ..., x_p]$ với $q \geq 1$. Cụ thể, khi tạo ra các mẫu đối nghịch
-, chuẩn $L_{\infty}$ được sử dụng để đánh giá sự thay đổi tối đa giá trị điểm ảnh (Goodfellow, 
+của vector $p$ chiều $x = [x_1, ..., x_p]$ với $q \geq 1$. Cụ thể, khi tạo ra các mẫu đối nghịch, chuẩn $L_{\infty}$ được sử dụng để đánh giá sự thay đổi tối đa giá trị điểm ảnh (Goodfellow, 
 Shlens, and Szegedy 2015), chuẩn $L_2$ được sử dụng để cải thiện chất lượng thị giác của 
 ảnh (Carlini and Wagner 2017b). Mặc dù, chuẩn $L_1$ thực tế được sử dụng rộng rãi 
 trong các bài toán chống nhiễu, khôi phục ảnh (Fu et al. 2006) cũng như phục hồi thưa (Candès and Wakin 2008), các mẫu đối nghịch dựa trên $L_1$ chưa được nghiên cứu nhiều. Trong bài toán mẫu đối nghịch,

@@ -1,14 +1,14 @@
 \section{Thuật toán EAD}
-Khi giải bài toán EAD trong \ref{eq:7} mà không có thành phần $L_1$, Carlini and Wagner 
+Khi giải bài toán EAD trong (\ref{eq:7}) mà không có thành phần $L_1$, Carlini and Wagner 
 sử dụng kĩ thuật COV (change-of-variable, kỹ thuật đổi biến) qua hàm \textit{tanh} trên $\mathbf{x}$ nhằm 
 mục đích loại bỏ ràng buộc $\mathbf{x} \in [0,1]^p$ (Carlini and Wagner 2017b). Khi 
-$\beta > 0$, ta thấy COV sẽ không hiệu quả để giải bài toán \ref{eq:7} vì mẫu đối 
+$\beta > 0$, ta thấy COV sẽ không hiệu quả để giải bài toán (\ref{eq:7}) vì mẫu đối 
 nghịch tương ứng sẽ không nhạy cảm với thay đổi trên $\beta$ (xem phần đánh giá hiệu 
 năng để biết chi tiết). Vì $L_1$ không khả vi trên toàn không gian, COV không giải 
 được bài toán \ref{eq:7} do không hiệu quả khi sử dụng phương pháp dưới đạo hàm (\textit{subgradient})
 trong việc giải bài toán tối ưu (Duchi and Singer 2009). 
 
-Để giải bài toán EAD trong \ref{eq:7} nhằm sinh ra các mẫu đối nghịch, tác giả đề
+Để giải bài toán EAD trong (\ref{eq:7}) nhằm sinh ra các mẫu đối nghịch, tác giả đề
 xuất sử dụng thuật toán ISTA (\textit{iterative shrinkage-thresholding algorithm – thuật toán lặp 
 với ngưỡng biến đổi}) (Beck and Teboulle 2009). ISTA là một thuật toán tối ưu bậc nhất
 phổ biến, trong đó thêm một bước điều chỉnh ngưỡng trong mỗi bước lặp. Cụ thể, 
@@ -33,10 +33,9 @@ Trong đó, $\alpha_k$ là độ dài bước tại bước lặp thứ $k+1$, $
 \end{equation}
 Với $i \in \{ 1, ..., p \}$. Nếu $|\mathbf{z}_i - \mathbf{x_0}_i| > \beta$, thành phần 
 $\mathbf{z}_i$ được co lại với hệ số $\beta$ và chiếu thành phần kết quả lên miền ràng buộc 
-chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu $|\mathbf{z}_i - \mathbf{x_0}_i| \leq \beta$
-, nó đặt ngưỡng $\mathbf{z}_i$ bằng cách thiết lập $[S_{\beta}(\mathbf{z})]_i = \mathbf{x_0}_i$.
-Chứng minh thuật toán tối ưu sử dụng \ref{eq:8} để giải bài toán EAD trong \ref{eq:7}
-được trình bày trong tài liệu \footnote{https://arxiv.org/abs/1709.04114}. Chú ý rằng, vì $g(\mathbf{x})$ là hàm mục tiêu của tấn công C\&W (Carlini and Wagner 2017b), thuật toán ISTA trong \ref{eq:8} có thể coi như 1 phiên bản mạnh hơn của phương pháp C\&W trong đó biến đổi giá trị điểm ảnh của mẫu đối nghịch nếu nó sai khác nhiều hơn $\beta$ so với điểm ảnh gốc, hoặc giữ nguyên giá trị điểm ảnh gốc nếu sự sai khác nhỏ hơn $\beta$.
+chấp nhận được thuộc đoạn $[0,1]$. Mặt khác, nếu $|\mathbf{z}_i - \mathbf{x_0}_i| \leq \beta$, nó đặt ngưỡng $\mathbf{z}_i$ bằng cách thiết lập $[S_{\beta}(\mathbf{z})]_i = \mathbf{x_0}_i$.
+Chứng minh thuật toán tối ưu sử dụng (\ref{eq:8}) để giải bài toán EAD trong (\ref{eq:7})
+được trình bày trong tài liệu \footnote{https://arxiv.org/abs/1709.04114}. Chú ý rằng, vì $g(\mathbf{x})$ là hàm mục tiêu của tấn công C\&W (Carlini and Wagner 2017b), thuật toán ISTA trong (\ref{eq:8}) có thể coi như 1 phiên bản mạnh hơn của phương pháp C\&W trong đó biến đổi giá trị điểm ảnh của mẫu đối nghịch nếu nó sai khác nhiều hơn $\beta$ so với điểm ảnh gốc, hoặc giữ nguyên giá trị điểm ảnh gốc nếu sự sai khác nhỏ hơn $\beta$.
 
 \begin{center}
 	\begin{tabular}{lll}

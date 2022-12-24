@@ -27,7 +27,7 @@ không nhắm đích sử dụng FGM và I-FGM cũng được triển khai theo 
 \underline{Tấn công C\&W:} Thay vì sử dụng hàm mất mát trên tập huấn luyện Carlini và Wagner
 đã thiết kế  một hiệu chỉnh $L_2$ trong hàm mất mát dựa trên lớp logit trong DNNs để sinh 
 ra các mẫu đối nghịch (Carlini and Wagner 2017b). Công thức này hóa ra là một trường hợp riêng của 
-thuật toát EAD (sẽ được trình bày trong phần sau). Tấn công C\&W được coi 
+thuật toán EAD (sẽ được trình bày trong phần sau). Tấn công C\&W được coi 
 là một trong những tấn công mạnh nhất đối với DNNs vì nó có thể phá vỡ cả những DNN không phòng thủ và DNN phòng thủ chắt lọc, nó cũng có khả năng chuyển giao tấn công khá tốt. 
 
 \underline{DeepFool:} là thuật toán tấn công $L_2$ không nhắm đích (Moosavi-Dezfooli, 
@@ -36,13 +36,13 @@ trong bài toán phân lớp. Nó cũng được sử dụng để tạo ra mộ
 các DNN vốn đã được huấn luyện trên các ảnh gốc (Moosavi-Dezfooli et al. 2016).
 
 \section{Phòng thủ trong DNNs}
-\underline{Chắt lọc phòng thủ (Defensive distillation):} Chắt lọc phòng thủ (Papernot et al.2016b) 
+\underline{Chắt lọc phòng thủ (Defensive distillation):} Chắt lọc phòng thủ (Papernot et al 2016b) 
 chống lại nhiễu loạn đối nghịch bằng cách sử dụng kỹ thuật chắt lọc trong (Hinton, 
 Vinyals, and Dean 2015) để huấn luyện lại cùng một mạng với xác suất lớp được dự đoán bởi 
 mạng ban đầu. Phương pháp này đưa ra tham số nhiệt độ $T$ trong lớp softmax để tăng cường 
 sức mạnh của mạng trước những nhiễu loạn đối nghịch.
 
-\underline{Huấn luyện đối nghịch (Advrsarial training):} có thể được triển khai theo 1 số cách khác nhau. 
+\underline{Huấn luyện đối nghịch (Adversarial training):} có thể được triển khai theo 1 số cách khác nhau. 
 Hướng tiếp cận chuẩn là thêm vào tập dữ liệu huấn luyện ban đầu các mẫu đối nghịch đã được 
 sửa đúng nhãn, sau đó huấn luyện lại mạng. (Zheng et al. 2016; Madry et al. 2017; 
 Tram`er et al. 2017; Zantedeschi, Nicolae, and Rawat 2017) đề xuất điều chỉnh training 
